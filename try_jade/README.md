@@ -45,6 +45,8 @@ html(lang='en')
 
 ## コンパイル
 
+単一ファイルのリアルタイムでのコンパイルは[CodePen](http://codepen.io/pen/)でも試すことが出来ます。
+
 gulpでのコンパイルタスクの記述は`gulpfile.js`を参考にしてください。
 
 [Wintersmith](http://wintersmith.io/)や[Hexo](https://hexo.io/)などのNode.js製の静的サイトジェネレータでもJadeのコンパイルに対応しているものも多いです。
