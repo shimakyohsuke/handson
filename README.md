@@ -2,27 +2,27 @@
 
 Jade は Node.js 製のテンプレートエンジンです。
 
-Hamlなどに見られるような、インデントで要素の階層を表す構文で初めての人にはとっつきにくい面もアリますが、
+Haml などに見られるような、インデントで要素の階層を表す構文で初めての人にはとっつきにくい面もアリますが、
 多様な機能など、静的サイト制作を強力に支援する機能があります。
 
-Jade 公式サイト 
+Jade 公式サイト
 
 http://jade-lang.com/
 
-HTMLからjadeの記法を得るには、オンラインのJade Converterが便利です。
+HTML から Jade の記法を得るには、オンラインの Jade Converterが便利です。
 
 http://html2jade.org/
 
-## HTMLの作成
+## HTML の作成
 
-基本的なHTMLの生成
+基本的な HTML の生成
 
 ````
 doctype html
 html(lang='en')
   head
     title Jade
-    script(type='text/javascript').
+    script.
       foo = true;
       bar = function () {};
       if (foo) {
@@ -45,13 +45,13 @@ html(lang='en')
 
 ## コンパイル
 
-gulpでのコンパイルタスクの記述は`gulpfile.js`を参考にしてください。
+gulp でのコンパイルタスクの記述は `gulpfile.js` を参考にしてください。
 
-[Wintersmith](http://wintersmith.io/)や[Hexo](https://hexo.io/)などのNode.js製の静的サイトジェネレータでもJadeのコンパイルに対応しているものも多いです。
+[Wintersmith](http://wintersmith.io/)や[Hexo](https://hexo.io/)などの Node.js 製の静的サイトジェネレータでも Jade のコンパイルに対応しているものも多いです。
 
 ## その他のテンプレートエンジン
 
-Jadeの記法が特殊で取り扱いしづらいという場合には、  
-同じくNode.js製のテンプレートエンジンとしてメジャーな EJS という選択肢もあります。
+Jade の記法が特殊で取り扱いしづらいという場合には、  
+同じく Node.js 製のテンプレートエンジンとしてメジャーな EJS という選択肢もあります。
 
 http://ejs.co/
