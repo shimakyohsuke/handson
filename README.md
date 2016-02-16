@@ -10,7 +10,7 @@ Jade 公式サイト
 
 ## HTML がこんな風に書けます。
 
-基本的な HTML の生成
+Jade で マークアップ
 
 ```
 doctype html
@@ -33,6 +33,8 @@ html(lang='en')
         | strong focus on performance
         | and powerful features.
 ```
+
+Jade ファイルが変換されたらこうなります。
 
 ```
 <!DOCTYPE html>
@@ -64,30 +66,36 @@ html(lang='en')
 </html>
 ```
 
+----
+
+ここから先は Node.js を使用します。
+
+<https://nodejs.org/en/>
+
+Node.js の環境がない方はオンライン上でコードを書けるサービス [CodePen](http://codepen.io/) で試していただくことができます。  
+※一部の機能については使用していただくことができません。
+
+----
+
 ## やってみよう
 
-このリポジトリをクローン（もしくは ZIP ファイルを DL）
-
+1. このリポジトリをクローン（もしくは ZIP ファイルを DL）
 ```
 $ git clone hogehoge && cd $_
 ```
-
-パッケージのインストール
-
+1. パッケージのインストール
 ```
 $ npm install
 ```
-
+1. Jade ファイルを作成するディレクトリに移動
 ```
 $ cd jade/
 ```
-
+1. index.jade ファイルを作成
 ```
 $ touch index.jade
 ```
-
-テキストエディターで、index.jade を編集
-
+1. テキストエディターで、index.jade を編集（以下をコピペしてください）
 ```
 //- index.jade
 doctype html
@@ -97,22 +105,21 @@ html(lang='en')
   body
     h1 Hello Jade !!
 ```
-
-Jade ファイルを HTML ファイルにコンパイル
-
-**Gulp の使い方はこの後◯時からハンズオンがあります。**
-
+1. Jade ファイルを HTML ファイルにコンパイル  
+1つ上のディレクトリに戻って、
+```
+$ cd ../
+```
+以下コマンドを実行
 ```
 $ gulp jade
 ```
-
 もしくは、
-
 ```
 $ npm run jade
 ```
 
-`./public/` ディレクトリに HTML ファイルがありますか？？
+`./public/` ディレクトリに HTML ファイルが作成されてますか？？
 
 ----
 
@@ -228,8 +235,6 @@ block content
 ## コンパイル
 
 gulp でのコンパイルタスクの記述は `gulpfile.js` を参考にしてください。
-
-**Gulp の使い方はこの後◯時からハンズオンがあります。**
 
 ## Jade を使って簡単な静的サイトなブログが作れる
 
