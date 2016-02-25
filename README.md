@@ -4,6 +4,7 @@
 
 - Jade は Node.js 製のテンプレートエンジンです。
 - [Haml](http://haml.info/) などに見られるような、インデントで要素の階層を表す構文で初めての人にはとっつきにくい面もアリますが、多様な機能など、静的サイト制作を強力に支援する機能があります。
+- Dreamweaver のテンプレート機能のように **共通部分の変更に強い静的サイトを作ることが可能です。**
 
 Jade 公式サイト  
 <http://jade-lang.com/>
@@ -16,7 +17,7 @@ Jade で マークアップ
 doctype html
 html(lang='en')
   head
-    title Jade
+    title Try Jade ハンズオン
     script.
       foo = true;
       bar = function () {};
@@ -24,7 +25,7 @@ html(lang='en')
         bar(1 + 5)
       }
   body
-    h1 Jade - node template engine
+    h1 Jade
     #container.col
       p You are amazing
       p
@@ -40,7 +41,7 @@ Jade ファイルが変換されたらこうなります。
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Jade</title>
+    <title>Try Jade ハンズオン</title>
     <script>
       foo = true;
       bar = function () {};
@@ -50,8 +51,7 @@ Jade ファイルが変換されたらこうなります。
     </script>
   </head>
   <body>
-    <h1>Jade - node template engine
-    </h1>
+    <h1>Jade</h1>
     <div id="container" class="col">
       <p>You are amazing
       </p>
@@ -123,8 +123,7 @@ $ npm run jade
 
 ----
 
-もしつまずいたら Jade のコードをオンラインで変換できる、  
-オンラインの Jade Converter が便利です。
+もしつまずいたら Jade のコードをオンラインで変換できる、Jade Converter が便利です。
 
 <http://html2jade.org/>
 
