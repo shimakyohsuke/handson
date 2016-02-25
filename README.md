@@ -70,7 +70,7 @@ $ npm install --save gulp-sass
 
 #### gulpファイルの用意
 
-```gulpfile.js```を、いつも使っているエディタで開きます。
+ ```gulpfile.js```を、いつも使っているエディタで開きます。
 
 ```
 var gulp = require("gulp");
@@ -82,6 +82,7 @@ gulp.task("sass", function() {	// ← sassと名前をつけたタスクを作�
         .pipe(gulp.dest("public/css"));	// ← このディレクトリに吐き出す
 });
 ```
+
 ```gulpfile.js```の中身を上記のようにしてください。
 （```//``` の後ろはコメントです。なくても大丈夫です。）
 
