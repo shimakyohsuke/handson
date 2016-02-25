@@ -70,7 +70,7 @@ $ npm install --save gulp-sass
 
 #### gulpファイルの用意
 
- ```gulpfile.js```を、いつも使っているエディタで開きます。
+ ``gulpfile.js``を、いつも使っているエディタで開きます。
 
 ```
 var gulp = require("gulp");
