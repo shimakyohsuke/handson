@@ -101,7 +101,7 @@ $ touch index.jade
 doctype html
 html(lang='en')
   head
-    title Try Jade
+    title Try Jade ハンズオン
   body
     h1 Hello Jade !!
 ```
@@ -132,6 +132,51 @@ $ npm run jade
 <http://html2jade.herokuapp.com/>
 
 
+## その他、機能
+
+### 変数が使える
+
+```
+//- index.jade
+doctype html
+html
+  head
+    title Try Jade ハンズオン
+  body
+    - var title = "タイトルだよ";
+    - var author = "関西フロントエンドUG";
+    - var theGreat = "FRONTEND CONFERENCE 2016";
+
+    h1= title
+    p I love #{author}
+    p Todays event is #{theGreat} !
+```
+
+### Iteration（繰り返し）
+
+<http://jade-lang.com/reference/iteration/>
+
+```
+//- index.jade
+doctype html
+html
+  head
+    title Try Jade ハンズオン
+  body
+    //- こんな風に書けたり、
+    ul
+      each val in [1, 2, 3, 4, 5]
+        li= val
+    //- こんな風に書いたり、
+    ul
+      each val, index in ['zero', 'one', 'two']
+        li= index + ': ' + val
+    //- こんな風に書いたりできます。
+    ul
+      each val, index in {1:'one',2:'two',3:'three'}
+        li= index + ': ' + val
+```
+
 ## 強力な機能
 
 ### 外部ファイルの取り込み
@@ -145,7 +190,7 @@ html
   //- ここで head.jade を呼び出し
   include ./includes/head.jade
   body
-    h1 My Site
+    h1 Try Jade ハンズオン
     p Welcome to my super lame site.
     //- ここで foot.jade を呼び出し
     include ./includes/foot.jade
@@ -154,7 +199,7 @@ html
 ```
 //- includes/head.jade
 head
-  title My Site
+  title Try Jade ハンズオン
   script(src='/javascripts/jquery.js')
   script(src='/javascripts/app.js')
 ```
@@ -171,7 +216,7 @@ head
 <!doctype html>
 <html>
   <head>
-    <title>My Site</title>
+    <title>Try Jade ハンズオン</title>
     <script src='/javascripts/jquery.js'></script>
     <script src='/javascripts/app.js'></script>
   </head>
