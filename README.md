@@ -53,8 +53,7 @@ Jade ファイルが変換されたらこうなります。
   <body>
     <h1>Jade</h1>
     <div id="container" class="col">
-      <p>You are amazing
-      </p>
+      <p>You are amazing</p>
       <p>
         Jade is a terse and simple
         templating language with a
@@ -192,6 +191,28 @@ html
       each val, index in {1:'one',2:'two',3:'three'}
         li= index + ': ' + val
 ```
+
+#### Filters
+
+<http://jade-lang.com/reference/filters/>
+
+```
+:markdown
+  # Markdown
+
+  I often like including markdown documents.
+script
+  :coffee-script
+    console.log 'This is coffee script'
+```
+
+```
+<h1>Markdown</h1>
+<p>I often like including markdown documents.</p>
+<script>console.log('This is coffee script')</script>
+```
+
+----
 
 ## 強力な機能
 
