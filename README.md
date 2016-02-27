@@ -358,7 +358,7 @@ mixin gnav(id, ...items)
 コンパイル後の HTML
 
 ```
-<ul class="l-gnav">
+<ul class="gnav">
   <li><a href="http://example.com/">TOP</a></li>
   <li><a href="http://example.com/about/">ABOUT</a></li>
 </ul>
@@ -374,7 +374,7 @@ gulp でのコンパイルタスクの記述は `gulpfile.js` を参考にして
 
 [Wintersmith](http://wintersmith.io/) や [Hexo](https://hexo.io/) などの Node.js 製の静的サイトジェネレータでも Jade のコンパイルに対応しているものも多いです。
 
-## その他のテンプレートエンジン
+## その他テンプレートエンジン
 
 Jade の記法が特殊で取り扱いしづらいという場合には、同じく Node.js 製のテンプレートエンジンとしてメジャーな EJS という選択肢もあります。
 
