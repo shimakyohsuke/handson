@@ -216,7 +216,7 @@ script
 
 ## 強力な機能
 
-### 外部ファイルの取り込み
+### Includes（外部ファイルの取り込み）
 
 <http://jade-lang.com/reference/includes/>
 
@@ -267,7 +267,7 @@ head
 </html>
 ```
 
-### テンプレートの継承
+### Extends（テンプレートの継承）
 
 <http://jade-lang.com/reference/extends/>
 
@@ -312,6 +312,59 @@ block content
   </body>
 </html>
 ```
+
+### Mixins
+
+<http://jade-lang.com/reference/mixins/>
+
+```
+mixin pet(name)
+  li.pet= name
+ul
+  +pet('cat')
+  +pet('dog')
+  +pet('pig')
+```
+
+コンパイル後の HTML
+
+```
+<ul>
+  <li class="pet">cat</li>
+  <li class="pet">dog</li>
+  <li class="pet">pig</li>
+</ul>
+```
+
+個人的によく使うやつ
+
+```
+mixin gnav(id, ...items)
+  ul(class=id)
+    each item in items
+      li
+        a(href="#{item.dir}")
+          | !{item.pageName}
+```
+
+```
++gnav(
+  'gnav',
+  {pageName: 'TOP', dir: 'http://example.com/'},
+  {pageName: 'ABOUT', dir: 'http://example.com/about/'}
+)
+```
+
+コンパイル後の HTML
+
+```
+<ul class="l-gnav">
+  <li><a href="http://example.com/">TOP</a></li>
+  <li><a href="http://example.com/about/">ABOUT</a></li>
+</ul>
+```
+
+----
 
 ## コンパイル
 
