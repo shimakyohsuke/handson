@@ -1,29 +1,29 @@
-# Try gulp ハンズオン
+# Try Gulp ハンズオン
 
-gulp は Node.js 製のタスクランナーツールです。
+Gulp は Node.js 製のタスクランナーツールです。
 
 Web制作の現場で発生するコンパイルや画像圧縮などの処理を、
 簡単に実行したり、1つにまとめて処理したりする事が出来ます。
 
-gulp 公式サイト 
+Gulp 公式サイト 
 
-[http://gulpjs.com/]()
+[http://Gulpjs.com/]()
 
 ## はじめに
 
 サンプルファイルを[ダウンロード](https://github.com/kfug/handson/archive/gulp.zip)するか、git経由でcloneしてきます。
 
 ````
-$ git clone https://github.com/kfug/handson -b gulp
+$ git clone https://github.com/kfug/handson -b Gulp
 ````
 
 ハンズオンを始める前に、
 
 ```
-$ cd [ハンズオンの資料のディレクトリ]/try_gulp
+$ cd [ハンズオンの資料のディレクトリ]/try_Gulp
 ```
 
-とコマンドを使用し、```try_gulp```ディレクトリに入りましょう。
+とコマンドを使用し、```try_Gulp```ディレクトリに入りましょう。
 
 ## Sassのコンパイルを試してみよう
 
@@ -54,32 +54,32 @@ $ sass assets/scss/common.scss:public/css/common.css
 
 ただ、このコマンドを毎回打つのも面倒です。そして、他のもの（Jade→HTMLや、Javascript/画像の圧縮...等）も同じようにコマンドで動きます。すべてを都度コマンドで動かすのはちょっと大変です。
 
-### gulpを使って、Sassをコンパイルしてみる
-ここで、gulpを使ってみます。
+### Gulpを使って、Sassをコンパイルしてみる
+ここで、Gulpを使ってみます。
 
-gulpはNode.js製のツールなので、npmという管理ツールのコマンドで用意していきましょう。
+GulpはNode.js製のツールなので、npmという管理ツールのコマンドで用意していきましょう。
 
 
-#### gulp用のsassコンパイラのダウンロード
+#### Gulp用のsassコンパイラのダウンロード
 
 ```
 $ npm install --save-dev gulp-sass
 ```
 
-こうすることで、``gulp-sass``というgulp用のsassコンパイラ（こういうNode.jsで使うツールのことをパッケージといいいます）がダウンロードされます。（本体は``node_modules``の中に入ります。これは触ってはいけません。）
+こうすることで、``gulp-sass``というGulp用のsassコンパイラ（こういうNode.jsで使うツールのことをパッケージといいいます）がダウンロードされます。（本体は``node_modules``の中に入ります。これは触ってはいけません。）
 
-#### gulpファイルの用意
+#### Gulpファイルの用意
 
  ``gulpfile.js``を、いつも使っているエディタで開きます。
 
 ```
-var gulp = require("gulp");
-var sass = require("gulp-sass");	// ← gulp-sassをsassという名前をつけて読み込み。
+var gulp = require('gulp');
+var sass = require('gulp-sass');	// ← Gulp-sassをsassという名前をつけて読み込み。
 
-gulp.task("sass", function() {	// ← sassと名前をつけたタスクを作ります宣言
-    gulp.src("assets/scss/*scss")	// ← このディレクトリにいる拡張子が「scss」のファイルが対象
+gulp.task('sass', function() {	// ← sassと名前をつけたタスクを作ります宣言
+    gulp.src('assets/scss/*scss')	// ← このディレクトリにいる拡張子が「scss」のファイルが対象
         .pipe(sass())	// ← 読み込んだsassを使う
-        .pipe(gulp.dest("public/css"));	// ← このディレクトリに吐き出す
+        .pipe(gulp.dest('public/css'));	// ← このディレクトリに吐き出す
 });
 ```
 
@@ -107,8 +107,8 @@ $ gulp sass
 ``sass``タスクの下に、下記を記載してください。
 
 ```
-gulp.task("sass-watch", ["sass"], function(){	// ← sass-watchという名前をつけたタスクをつくります宣言。開始前にsassタスクを実行する、というオプションつきです。
-	gulp.watch("assets/scss/*scss",["sass"]);	// ← のディレクトリにいる拡張子が「scss」のファイルが変更されたらsassタスクを実行。
+gulp.task('sass-watch', ['sass'], function(){	// ← sass-watchという名前をつけたタスクをつくります宣言。開始前にsassタスクを実行する、というオプションつきです。
+	gulp.watch('assets/scss/*scss',['sass']);	// ← のディレクトリにいる拡張子が「scss」のファイルが変更されたらsassタスクを実行。
 })
 ```
 
@@ -141,27 +141,27 @@ $ npm install --save-dev browser-sync
 ダウンロードができたら、gulpfile.jsを編集します。
 
 ```
-var gulp = require("gulp");
-var sass = require("gulp-sass");
-var browser = require("browser-sync");// ← browserという名前をつけてbrowser-syncを読み込み
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var browser = require('browser-sync');// ← browserという名前をつけてbrowser-syncを読み込み
 
-gulp.task("sass", function() {
-    gulp.src("assets/scss/*scss")
+gulp.task('sass', function() {
+    gulp.src('assets/scss/*scss')
         .pipe(sass())
-        .pipe(gulp.dest("public/css"))
+        .pipe(gulp.dest('public/css'))
         .pipe(browser.reload({stream:true}));	// ← browserのreloadという機能を呼び出す
 });
 
-gulp.task("server", function() {	// ← serverというタスクをつくります宣言。
+gulp.task('server', function() {	// ← serverというタスクをつくります宣言。
     browser({	// ← browserを呼び出す
         server: {	// ← browserのserverという機能を呼び出してサーバを立てる
-            baseDir: "public"	// ← publicというディレクトリ以下を表示
+            baseDir: 'public'	// ← publicというディレクトリ以下を表示
         }
     });
 });
 
-gulp.task("browser-sync",['server'], function() {	// ← sass-watchというタスクをbrowser-syncというタスクに変更し、実行する前にかならずserverタスクを実行します。
-    gulp.watch("assets/scss/*scss",["sass"]);
+gulp.task('browser-sync',['server'], function() {	// ← sass-watchというタスクをbrowser-syncというタスクに変更し、実行する前にかならずserverタスクを実行します。
+    gulp.watch('assets/scss/*scss',['sass']);
 });
 
 ```
@@ -177,17 +177,17 @@ $ gulp browser-sync
 
 それでは、``assets/scss/common.scss``に変更を加えてみましょう。変更されたら、ブラウザですぐに反映されているのが確認できると思います。
 
-ここで、gulpのタスクの名前をちょっと変えてみます。
+ここで、Gulpのタスクの名前をちょっと変えてみます。
 
 ```
-gulp.task("browser-sync",['server'], function() {
+gulp.task('browser-sync',['server'], function() {
 ......
 ```
 
 上記の行を、
 
 ```
-gulp.task("default",['server'], function() {
+gulp.task('default',['server'], function() {
 ......
 ```
 
@@ -220,10 +220,10 @@ $ npm install --save-dev gulp-jade
 ダウンロードができたら、gulpfile.jsを編集します。
 
 ```
-var gulp = require("gulp");
-var sass = require("gulp-sass");
-var browser = require("browser-sync");
-var jade = require('gulp-jade');	// ← jadeという名前をつけてgulp-jadeを読み込み
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var browser = require('browser-sync');
+var jade = require('gulp-jade');	// ← jadeという名前をつけてGulp-jadeを読み込み
 
 ......
 // sassのタスクは変更ないので省略
@@ -243,9 +243,9 @@ gulp.task('jade', function () {// ← jadeというタスクをつくります�
 // serverのタスクは変更ないので省略
 ......
 
-gulp.task("default",['server'], function() {
-    gulp.watch("assets/scss/*scss",["sass"]);
-    gulp.watch("assets/tmpl/*jade",["jade"]);// ← のディレクトリにいる拡張子が「jade」のファイルが変更されたらjadeタスクを実行。
+gulp.task('default',['server'], function() {
+    gulp.watch('assets/scss/*scss',['sass']);
+    gulp.watch('assets/tmpl/*jade',['jade']);// ← のディレクトリにいる拡張子が「jade」のファイルが変更されたらjadeタスクを実行。
 });
 
 ```
@@ -263,7 +263,7 @@ sassの時と同様、保存と同時にブラウザがリロードされて、�
 ## JSの圧縮
 
 JavaScriptの圧縮にも手を出してみましょう。``gulpfile.js``を
-触るときには``ctrl + c``でgulpの動作を一度止めましょう。
+触るときには``ctrl + c``でGulpの動作を一度止めましょう。
 
 JavaScriptの圧縮に使うパッケージは``gulp-uglify``です。ダウンロードしてきましょう。
 
@@ -274,21 +274,21 @@ $ npm install --save-dev gulp-uglify
 ダウンロードが終わったら、``gulpfile.js``を編集します。
 
 ```
-var gulp = require("gulp");
-var sass = require("gulp-sass");
-var browser = require("browser-sync");
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var browser = require('browser-sync');
 var jade = require('gulp-jade');
-var uglify = require("gulp-uglify");	// ← uglifyという名前をつけてgulp-uglifyを読み込み
+var uglify = require('gulp-uglify');	// ← uglifyという名前をつけてGulp-uglifyを読み込み
 
 
 ......
 // sassとjadeのタスクは変更ないので省略
 ......
 
-gulp.task("js", function() {	// ← jsというタスクをつくります宣言。
-    gulp.src("./assets/js/*.js")	// ← このディレクトリにいる拡張子が「js」のファイルが対象
+gulp.task('js', function() {	// ← jsというタスクをつくります宣言。
+    gulp.src('./assets/js/*.js')	// ← このディレクトリにいる拡張子が「js」のファイルが対象
         .pipe(uglify())	// ← uglifyをつかう
-        .pipe(gulp.dest("./public/js"))// ← このディレクトリに吐き出す
+        .pipe(gulp.dest('./public/js'))// ← このディレクトリに吐き出す
         .pipe(browser.reload({stream:true}));// ← browserのreloadという機能を呼び出す
 });
 
@@ -296,10 +296,10 @@ gulp.task("js", function() {	// ← jsというタスクをつくります宣言
 // serverのタスクは変更ないので省略
 ......
 
-gulp.task("default",['server'], function() {
-    gulp.watch("assets/scss/*scss",["sass"]);
-    gulp.watch("assets/tmpl/*jade",["jade"]);
-    gulp.watch("assets/js/*js",["js"]);// ← のディレクトリにいる拡張子が「js」のファイルが変更されたらjadeタスクを実行。
+gulp.task('default',['server'], function() {
+    gulp.watch('assets/scss/*scss',['sass']);
+    gulp.watch('assets/tmpl/*jade',['jade']);
+    gulp.watch('assets/js/*js',['js']);// ← のディレクトリにいる拡張子が「js」のファイルが変更されたらjadeタスクを実行。
 
 });
 ```
@@ -314,7 +314,7 @@ $ gulp
 
 ## 画像の圧縮とかも出来ます
 
-画像圧縮のパッケージはたくさん種類があるのですが、今回は``gulp-imagemin``を使用してみます。一度``ctrl + c``でgulpの動作を一度止めましょうね。
+画像圧縮のパッケージはたくさん種類があるのですが、今回は``gulp-imagemin``を使用してみます。一度``ctrl + c``でGulpの動作を一度止めましょうね。
 
 ```
 $ npm install --save-dev gulp-imagemin
@@ -325,35 +325,35 @@ $ npm install --save-dev imagemin-pngquant
 ``gulpfile.js``は、下記の様にします。
 
 ```
-var gulp = require("gulp");
-var sass = require("gulp-sass");
-var browser = require("browser-sync");
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var browser = require('browser-sync');
 var jade = require('gulp-jade');
-var uglify = require("gulp-uglify");
-var imagemin = require("gulp-imagemin");	// ← imageminという名前をつけてgulp-imageminを読み込み
-var pngquant = require("imagemin-pngquant");	// ← pngquantという名前をつけてimagemin-pngquantを読み込み（imageminで使うプラグイン）
+var uglify = require('gulp-uglify');
+var imagemin = require('gulp-imagemin');	// ← imageminという名前をつけてGulp-imageminを読み込み
+var pngquant = require('imagemin-pngquant');	// ← pngquantという名前をつけてimagemin-pngquantを読み込み（imageminで使うプラグイン）
 
 
 ......
 // sass,jade,jsのタスクは変更ないので省略
 ......
-gulp.task("image", function() {	// ← imageというタスクをつくります宣言。
-    gulp.src("./assets/images/*")	// ← このディレクトリにいるファイルが対象
+gulp.task('image', function() {	// ← imageというタスクをつくります宣言。
+    gulp.src('./assets/images/*')	// ← このディレクトリにいるファイルが対象
         .pipe(imagemin({	// ← imageminをつかう
             use: [pngquant()]	// ← pngquantプラグインを使う
         }))
-        .pipe(gulp.dest("./public/images"))// ← このディレクトリに吐き出す
+        .pipe(gulp.dest('./public/images'))// ← このディレクトリに吐き出す
         .pipe(browser.reload({stream:true}));// ← browserのreloadという機能を呼び出す
 });
 ......
 // serverのタスクは変更ないので省略
 ......
 
-gulp.task("default",['server'], function() {
-    gulp.watch("assets/scss/*scss",["sass"]);
-    gulp.watch("assets/tmpl/*jade",["jade"]);
-    gulp.watch("assets/js/*js",["js"]);
-    gulp.watch("assets/images/*.{png,jpg,gif}",["image"]);// ← のディレクトリにいる拡張子が「png,jpg,gif」のファイルが変更されたらimageタスクを実行。
+gulp.task('default',['server'], function() {
+    gulp.watch('assets/scss/*scss',['sass']);
+    gulp.watch('assets/tmpl/*jade',['jade']);
+    gulp.watch('assets/js/*js',['js']);
+    gulp.watch('assets/images/*.{png,jpg,gif}',['image']);// ← のディレクトリにいる拡張子が「png,jpg,gif」のファイルが変更されたらimageタスクを実行。
 });
 ```
 
@@ -374,27 +374,27 @@ $ npm install --save-dev gulp-changed
 ```
 
 ```
-var gulp = require("gulp");
-var sass = require("gulp-sass");
-var browser = require("browser-sync");
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var browser = require('browser-sync');
 var jade = require('gulp-jade');
-var uglify = require("gulp-uglify");
-var imagemin = require("gulp-imagemin");
-var pngquant = require("imagemin-pngquant");
-var changed  = require('gulp-changed');	// ← changedという名前をつけてgulp-changedを読み込み
+var uglify = require('gulp-uglify');
+var imagemin = require('gulp-imagemin');
+var pngquant = require('imagemin-pngquant');
+var changed  = require('gulp-changed');	// ← changedという名前をつけてGulp-changedを読み込み
 
 ......
 // sass,jade,jsのタスクは変更ないので省略
 ......
 
-gulp.task("image", function() {
-    gulp.src("./assets/images/*.{png,jpg,gif}")
-        .pipe(changed("./public/images"))// ← public/imagesディレクトリに対して、changedをつかう
+gulp.task('image', function() {
+    gulp.src('./assets/images/*.{png,jpg,gif}')
+        .pipe(changed('./public/images'))// ← public/imagesディレクトリに対して、changedをつかう
         .pipe(imagemin({
             progressive: true,
             use: [pngquant()]
         }))
-        .pipe(gulp.dest("./public/images"))
+        .pipe(gulp.dest('./public/images'))
         .pipe(browser.reload({stream:true}));
 });
 
