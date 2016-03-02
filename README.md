@@ -7,23 +7,23 @@ Web制作の現場で発生するコンパイルや画像圧縮などの処理�
 
 Gulp 公式サイト 
 
-[http://Gulpjs.com/]()
+[http://gulpjs.com/]()
 
 ## はじめに
 
 サンプルファイルを[ダウンロード](https://github.com/kfug/handson/archive/gulp.zip)するか、git経由でcloneしてきます。
 
 ````
-$ git clone https://github.com/kfug/handson -b Gulp
+$ git clone https://github.com/kfug/handson -b gulp
 ````
 
 ハンズオンを始める前に、
 
 ```
-$ cd [ハンズオンの資料のディレクトリ]/try_Gulp
+$ cd [ハンズオンの資料のディレクトリ]/try_gulp
 ```
 
-とコマンドを使用し、```try_Gulp```ディレクトリに入りましょう。
+とコマンドを使用し、```try_gulp```ディレクトリに入りましょう。
 
 ## Sassのコンパイルを試してみよう
 
@@ -43,14 +43,14 @@ $ sudo gem install sass
 #### Sassのコンパイルの仕方
 SassをCSSにコンパイルしてみます。
 
-Sassファイルは```assets/scss```に入っています。SassはこのままではHTMLから読み込むことはできません。SassからCSSに変換（コンパイル）する必要があります。
+Sassファイルは``assets/scss``に入っています。SassはこのままではHTMLから読み込むことはできません。SassからCSSに変換（コンパイル）する必要があります。
 
-CSSを吐き出すディレクトリ```public/css```をあらかじめ作っておきましょう。
+CSSを吐き出すディレクトリ``public/css``をあらかじめ作っておきましょう。
 
 ```
 $ sass assets/scss/common.scss:public/css/common.css
 ```
-とコマンドを打つと、```assets/scss/common.scss```に書かれたSassファイルが変換されて```public/css/common.css```にCSSが吐き出されます。
+とコマンドを打つと、``assets/scss/common.scss``に書かれたSassファイルが変換されて``public/css/common.css``にCSSが吐き出されます。
 
 ただ、このコマンドを毎回打つのも面倒です。そして、他のもの（Jade→HTMLや、Javascript/画像の圧縮...等）も同じようにコマンドで動きます。すべてを都度コマンドで動かすのはちょっと大変です。
 
