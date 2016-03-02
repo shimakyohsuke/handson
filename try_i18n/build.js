@@ -32,14 +32,19 @@ function processFiles (source, target, variables) {
 function processFile (source, target, variables, fileName) {
   var sourceFile = path.join(source, fileName)
   var targetFile = path.join(target, fileName)
-  var data = readAndReplaceFile(variables, sourceFile)
+  var data = readAndReplaceFile(variables, sourceFile, fileName)
   mkdirp(path.dirname(targetFile))
   fs.writeFileSync(targetFile, data)
 }
 
-function readAndReplaceFile (variables, file) {
+function readAndReplaceFile (variables, file, relative) {
   var data = fs.readFileSync(file, 'utf8')
-  return data.replace(TEMPLATE_PATTERN, fillPlaceholder.bind(null, variables))
+  return data.replace(TEMPLATE_PATTERN,
+    fillPlaceholder.bind(null, Object.assign({
+      file: relative,
+      path: relative.substr(0, relative.length - path.extname(relative).length)
+    }, variables))
+  )
 }
 
 function find (folder) {
@@ -113,7 +118,7 @@ function fillPlaceholder (variables, full, name) {
 
 function getTemplate (variables, name) {
   if (!_templates[name]) {
-    _templates[name] = readAndReplaceFile(variables, path.join(TEMPLATE, name))
+    _templates[name] = readAndReplaceFile(variables, path.join(TEMPLATE, name), name)
   }
   return _templates[name]
 }
