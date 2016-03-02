@@ -1,17 +1,17 @@
-# Try Jade ハンズオン
+# Jade で始める新しい HTML の書き方
 
 ## Jade とは
+
+Jade - Template Engine  
+<http://jade-lang.com/>
 
 - Jade は Node.js 製のテンプレートエンジンです。
 - [Haml](http://haml.info/) などに見られるような、インデントで要素の階層を表す構文で初めての人にはとっつきにくい面もアリますが、多様な機能など、静的サイト制作を強力に支援する機能があります。
 - Dreamweaver のテンプレート機能のように **共通部分の変更に強い静的サイトを作ることが可能です。**
 
-Jade 公式サイト  
-<http://jade-lang.com/>
+## HTML がこんな風に書けます！
 
-## HTML がこんな風に書けます。
-
-Jade で マークアップ
+Jade でマークアップ！
 
 ```
 doctype html
@@ -72,16 +72,24 @@ Jade ファイルが変換されたらこうなります。
 <https://nodejs.org/en/>
 
 Node.js の環境がない方はオンライン上でコードを書けるサービス [CodePen](http://codepen.io/) で試していただくことができます。  
-※一部の機能については使用していただくことができません。
+※ただし一部の機能については使用していただくことができません。
 
 ----
 
 ## やってみよう
 
-##### このリポジトリをクローン（もしくは ZIP ファイルを DL）
+##### サンプルファイルを [ダウンロード](https://github.com/kfug/handson/archive/try_jade.zip) するか、git 経由で clone します。
 
 ```
-$ git clone hogehoge && cd $_
+$ git clone https://github.com/kfug/handson -b try_jade
+```
+
+[zip ファイルをダウンロード](https://github.com/kfug/handson/archive/try_jade.zip)
+
+##### 作業ディレクトリに移動
+
+```
+$ cd [git clone したディレクトリ、もしくは zip ファイルを展開したディレクトリ]/handson/try_jade
 ```
 
 ##### パッケージのインストール
@@ -90,19 +98,13 @@ $ git clone hogehoge && cd $_
 $ npm install
 ```
 
-##### Jade ファイルを作成するディレクトリに移動
+##### テキストエディターで、index.jade を編集
 
-```
-$ cd jade/
-```
+編集するファイルはこちらにあります。
 
-##### index.jade ファイルを作成
+handson/try_jade/jade/index.jade
 
-```
-$ touch index.jade
-```
-
-##### テキストエディターで、index.jade を編集（以下をコピペしてください）
+ご使用されてるテキストエディターで、index.jade を開き、以下をコピペしてください。
 
 ```
 //- index.jade
@@ -114,13 +116,9 @@ html(lang='en')
     h1 Hello Jade !!
 ```
 
-##### Jade ファイルを HTML ファイルにコンパイル  
+貼り付けできましたら保存してください。
 
-1つ上のディレクトリに戻って、
-
-```
-$ cd ../
-```
+##### Jade ファイルを HTML ファイルにコンパイル
 
 以下コマンドを実行
 
@@ -134,7 +132,7 @@ $ gulp jade
 $ npm run jade
 ```
 
-`./public/` ディレクトリに HTML ファイルが作成されてますか？？
+`./public/` ディレクトリに HTML ファイルが作成されていますか？？
 
 ----
 
@@ -146,8 +144,56 @@ $ npm run jade
 
 <http://html2jade.herokuapp.com/>
 
+----
 
-## その他、機能
+## 基本的な機能
+
+### 書き方
+
+※以下サンプルコード内の半角スペースは必ず必要です。
+
+```
+//- index.jade
+doctype html
+html
+  head
+    title Try Jade ハンズオン
+  body
+    //- 改行したい
+    p
+      | 改行
+      br
+      | したい
+
+    //- 改行して `span` タグで囲いたい
+    p
+      | 改行して
+      br
+      span `span` タグで囲いたい
+
+    //- リンクの挿入
+    a(href="http://kfug.jp/frontconf2016/") link
+
+    //- id, class の付与
+    div#id
+      | div タグに id が付与されます。
+
+    div.class
+      | div タグに class が付与されます。
+
+    div#id.class
+      | div タグに id と class が付与されます。
+
+    #id.class
+      | タグを省略すると div タグに変換され、id と class が付与されます。
+
+    //- ul タグの中に a タグ挿入
+    ul
+      li
+        a(href="http://kfug.jp/frontconf2016/") link
+      //- このようにも書けます。
+      li: a(href="http://kfug.jp/frontconf2016/") link
+```
 
 ### 変数が使える
 
@@ -167,7 +213,7 @@ html
     p Todays event is #{theGreat} !
 ```
 
-### Iteration（繰り返し）
+### Iteration（繰り返し処理）
 
 <http://jade-lang.com/reference/iteration/>
 
@@ -192,24 +238,42 @@ html
         li= index + ': ' + val
 ```
 
-#### Filters
+### Filters
 
 <http://jade-lang.com/reference/filters/>
 
-```
-:markdown
-  # Markdown
-
-  I often like including markdown documents.
-script
-  :coffee-script
-    console.log 'This is coffee script'
-```
+※Markdown や CoffeeScript を Jade ファイル内に記述し HTML に変換する場合は、別途必要なパッケージがございます。
 
 ```
-<h1>Markdown</h1>
-<p>I often like including markdown documents.</p>
-<script>console.log('This is coffee script')</script>
+doctype html
+html
+  head
+    title Try Jade ハンズオン
+  body
+    //- Markdown が書ける
+    :markdown
+      # Markdown が書けた
+
+      文章が入ります。
+
+    //- CoffeeScript が書ける
+    script
+      :coffee-script
+        console.log 'This is CoffeeScript'
+```
+
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Try Jade ハンズオン</title>
+  </head>
+  <body>
+    <h1>Markdown が書けた</h1>
+    <p>文章が入ります。</p>
+    <script>console.log('This is CoffeeScript')</script>
+  </body>
+</html>
 ```
 
 ----
@@ -220,21 +284,23 @@ script
 
 <http://jade-lang.com/reference/includes/>
 
+jade/ ディレクトリ内に includes/ ディレクトリを作成します。
+
 ```
-//- index.jade
+//- jade/index.jade
 doctype html
 html
   //- ここで head.jade を呼び出し
-  include ./includes/head.jade
+  include ./includes/_head.jade
   body
     h1 Try Jade ハンズオン
     p Welcome to my super lame site.
     //- ここで foot.jade を呼び出し
-    include ./includes/foot.jade
+    include ./includes/_foot.jade
 ```
 
 ```
-//- includes/head.jade
+//- jade/includes/_head.jade
 head
   title Try Jade ハンズオン
   script(src='/javascripts/jquery.js')
@@ -242,7 +308,7 @@ head
 ```
 
 ```
-//- includes/foot.jade
+//- jade/includes/_foot.jade
 #footer
   p Copyright (c) foobar
 ```
@@ -272,7 +338,7 @@ head
 <http://jade-lang.com/reference/extends/>
 
 ```
-//- layout.jade
+//- _layout.jade
 doctype html
 html
   head
@@ -287,13 +353,13 @@ html
 
 ```
 //- index.jade
-extends ./layout.jade
+extends ./_layout.jade
 
-//- layout.jade の title を上書きしてます。
+//- _layout.jade の title を上書きしてます。
 block title
   title Article Title
 
-//- layout.jade の body に追加
+//- _layout.jade の body に追加
 block content
   h1 My Article
 ```
@@ -320,6 +386,7 @@ block content
 ```
 mixin pet(name)
   li.pet= name
+
 ul
   +pet('cat')
   +pet('dog')
@@ -366,7 +433,7 @@ mixin gnav(id, ...items)
 
 ----
 
-## コンパイル
+## gulp を使ってコンパイル
 
 gulp でのコンパイルタスクの記述は `gulpfile.js` を参考にしてください。
 
