@@ -21,13 +21,29 @@ processFiles(SOURCE, path.join(TARGET, 'ja'), {
   title: 'クール ホームページ',
   lang: 'ja',
   otherLang: 'en',
-  otherLangName: 'English'
+  otherLangName: 'English',
+  index: {
+    title: 'Ｆｒｏｎｔｅｎｄ  Ｃｏｎｆｅｒｅｎｃｅ  ２０１６にようこぞ!',
+    content: '今日は国際化を学びましょう。営業やエンタテインメントは海外とシェアしますように。私たちのスキルは関西のために大切です。'
+  },
+  product: {
+    title: '発表ようの商品!',
+    content: '何かを買わないといけません。買わないとどこからお金が入るの？'
+  }
 })
 processFiles(SOURCE, path.join(TARGET, 'en'), {
   title: 'Cool Homepage',
   lang: 'en',
   otherLang: 'ja',
-  otherLangName: '日本語'
+  otherLangName: '日本語',
+  index: {
+    title: 'Welcome to the Frontend Conference 2016!',
+    content: 'Today we will study internationalization to bring commerce and entertainment from and to Osaka. Our skill is important for making Kansai better.'
+  },
+  product: {
+    title: 'Product for the conference!',
+    content: 'Because you will need to buy something, else it isn\'t gonna pay for itself.'
+  }
 })
 
 function processFiles (source, target, variables) {
