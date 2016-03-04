@@ -87,7 +87,7 @@ $ git clone https://github.com/kfug/handson -b try_jade
 ##### 作業ディレクトリに移動
 
 ```
-$ cd [git clone したディレクトリ、もしくは zip ファイルを展開したディレクトリ]/handson/try_jade
+$ cd [zip ファイルを展開したディレクトリ]/handson/
 ```
 
 ##### パッケージのインストール
@@ -100,7 +100,7 @@ $ npm install
 
 編集するファイルはこちらにあります。
 
-handson/try_jade/jade/index.jade
+handson/jade/index.jade
 
 ご使用されてるテキストエディターで、index.jade を開き、以下をコピペしてください。
 
@@ -130,7 +130,7 @@ $ gulp jade
 $ npm run jade
 ```
 
-`./public/` ディレクトリに HTML ファイルが作成されていますか？？
+`handson/public/` ディレクトリに HTML ファイルが作成されていますか？？
 
 ----
 
@@ -192,7 +192,6 @@ html
       //- このようにも書けます。
       li: a(href="http://kfug.jp/frontconf2016/") link
 ```
-
 
 [CodePen で見る](http://codepen.io/shimakyohsuke/pen/WwQraX)
 
@@ -307,7 +306,15 @@ html
 
 <http://jade-lang.com/reference/includes/>
 
-**jade/ ディレクトリ内に sample2/ ディレクトリを作成します。**
+サンプルファイルを `sample1/` にご用意しております。
+
+```
+handson/sample1/index.jade
+handson/sample1/_header.jade
+handson/sample1/_footer.html
+```
+
+**jade/ ディレクトリ内に sample1/ ディレクトリを作成し以下を作成します。**
 
 ```
 //- jade/sample1/index.jade
@@ -337,6 +344,27 @@ head
 </div>
 ```
 
+```
+<!-- jade/sample1/_footer.html -->
+<div id="footer">
+  <p>Copyright (c) KFUG</p>
+</div>
+```
+
+3ファイル書けたら、以下コマンドを実行
+
+```
+$ gulp jade
+```
+
+もしくは、
+
+```
+$ npm run jade
+```
+
+`handson/public/sample1/index.html` が作成されていますか？？
+
 コンパイル後の HTML
 
 ```
@@ -363,7 +391,14 @@ head
 
 <http://jade-lang.com/reference/extends/>
 
-**jade/ ディレクトリ内に sample2/ ディレクトリを作成します。**
+サンプルファイルを `sample2/` にご用意しております。
+
+```
+handson/sample2/index.jade
+handson/sample2/_layout.jade
+```
+
+**jade/ ディレクトリ内に sample2/ ディレクトリを作成し以下を作成します。**
 
 ```
 //- jade/sample2/_layout.jade
@@ -391,6 +426,20 @@ block title
 block content
   h1 My Article
 ```
+
+3ファイル書けたら、以下コマンドを実行
+
+```
+$ gulp jade
+```
+
+もしくは、
+
+```
+$ npm run jade
+```
+
+`handson/public/sample2/index.html` が作成されていますか？？
 
 コンパイル後の HTML
 
@@ -445,7 +494,6 @@ mixin gnav(id, ...items)
 ```
 
 [CodePen で見る](http://codepen.io/shimakyohsuke/pen/MyaKRP)
-
 
 パンくずリスト
 
