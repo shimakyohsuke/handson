@@ -5,22 +5,22 @@
 国際化のテーマは広いので、このハンズオンは翻訳だけにフォーカスをします。
 
 ## 国際化と i18n のつながり
-ハンズオンを始まる間に国際化や`i18n`の言葉の説明が要ります。
+ハンズオンを始める前に国際化や `i18n` の言葉の説明をします。
 
 > 1970年代か1980年代かにDECで作られた用法といわれる
 
-[i18n](https://ja.wikipedia.org/wiki/%E5%9B%BD%E9%9A%9B%E5%8C%96%E3%81%A8%E5%9C%B0%E5%9F%9F%E5%8C%96#i18n) "internationalisation"と"localisation"は微妙です。軽く説明すると i18n は国際の方はコンテンツに手を入れることです。l10n は場所、通貨などを対応するコンテンツです。
+[i18n](https://ja.wikipedia.org/wiki/%E5%9B%BD%E9%9A%9B%E5%8C%96%E3%81%A8%E5%9C%B0%E5%9F%9F%E5%8C%96#i18n)  "internationalisation" と "localization" の違いは微妙です。簡単説明すると i18n は全世界の方々がコンテンツに手を入れることです。l10n は場所、通貨などに対応するコンテンツです。
 
-英語と日本語のウエッブサイトは **i18n** と考えていいです。
+英語と日本語のウェブサイトは **i18n** と考えていいです。
 
-[USD](https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%A1%E3%83%AA%E3%82%AB%E5%90%88%E8%A1%86%E5%9B%BD%E3%83%89%E3%83%AB)や[GBP](https://ja.wikipedia.org/wiki/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%E3%83%BB%E3%83%9D%E3%83%B3%E3%83%89)や[AUD](https://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%AA%E3%82%A2%E3%83%BB%E3%83%89%E3%83%AB)で買い物できるサイトは **l10n** として考えていいと思います。
+[USD](https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%A1%E3%83%AA%E3%82%AB%E5%90%88%E8%A1%86%E5%9B%BD%E3%83%89%E3%83%AB) や [GBP](https://ja.wikipedia.org/wiki/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%E3%83%BB%E3%83%9D%E3%83%B3%E3%83%89) や [AUD](https://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%AA%E3%82%A2%E3%83%BB%E3%83%89%E3%83%AB)で買い物できるサイトは **l10n** として考えていいと思います。
 
-残念ながら違いがぼけていますのであんまり重要じゃないと思います。
+残念ながら違いがぼやけていますのであまり重要じゃないと思います。
 
 ## はじめに
-ハンズオンのために[Node.js](https://nodejs.org/)が必要となります。
+ハンズオンのために [Node.js](https://nodejs.org/) が必要となります。
 
-そうしてサンプルファイルを[ダウンロード](https://github.com/kfug/handson/archive/i18n.zip)するか、git経由でcloneしてきます。
+そしてサンプルファイルを[ダウンロード](https://github.com/kfug/handson/archive/i18n.zip)するか、 git 経由で clone してください。
 
 ````
 $ git clone https://github.com/kfug/handson
@@ -35,18 +35,18 @@ $ cd [ハンズオンの資料のディレクトリ]/try_i18n
 とコマンドを使用し、`try_i18n` ディレクトリに入りましょう。
 
 ### ハンズオンの使い方
-`try_i18n`のフォルダーに `build.js` というファイルが入っています。`build.js`はフレームワークとライブラリーなしで動いています。ハンズオン中は `build.js` をじるのが必要となります。
+`try_i18n` のフォルダーに `build.js` というファイルが入っています。 `build.js` はフレームワークとライブラリーなしで動いています。ハンズオン中は `build.js` を書き変えが必要となります。
 
-`node build.js` を呼ぶと **すごく簡単** なビルドが動いています。ビルドで `src` や `template` のフォルダーに入っているファイルを使って `build` フォルダーにウエブサイトを書き出しています。
+`node build.js` を呼ぶと **すごく簡単な** ビルドが動いています。ビルドで `src` や `template` のフォルダーに入っているファイルを使って `build` フォルダーにウェブサイトを書き出しています。
 
-例えば: ソースフォルダーに入っている `index.html` は　`{{head}}` のプレースホルダーがあります。ビルド中には `{{head}}` が `fillPlaceHolder` の関数で `template/head.html` にリプレースされています。その上は `template/head.html` に ``{{title}}``というプレースホルダーが入っています。`build.js` の `VARIABLES` 変数に `title` というプロパティーが入っていますので　テンプレートの代わりにそれを使っています。
+例えば: ソースフォルダーに入っている `index.html` は　`{{head}}` のプレースホルダーがあります。ビルド中にはその `{{head}}` が `fillPlaceHolder` の関数で `template/head.html` にリプレースされています。その上は `template/head.html` に ``{{title}}`` というプレースホルダーが入っています。`build.js` の `VARIABLES` 変数に `title` というプロパティーが入っていますので　テンプレートの代わりにそれを使っています。
 
-ハンズオンの間は一つ一つのステップの後に幾つか `node build.js` を読んでください。`build` の中ファイルはそのままにブラウザーに見てください。チェンジがすぐ見たい場合は `slr` 見たいなウエッブサーバを使ってもいいと思います。(インストールは `npm i slr -g`、動かすは `slr build`)
+ハンズオン中は一つ一つのステップごとに `node build.js` を読んでください。`build` フォルダーの中のファイルはそのままブラウザーを使って見てください。チェンジをすぐ見たい場合は `slr` みたいなウェブサーバーを使ってもいいと思います。(インストールは `npm i slr -g` 動かすのは `slr build`)
 
-_メモ：全ての JavaScript コードは [standard](https://github.com/feross/standard) フォーマッティングにフォマットしています。_
+_メモ：全ての JavaScript コードは [standard](https://github.com/feross/standard) フォーマッティングに書いています。_
 
 ## 二つ目のバーション
-翻訳のコストを減らすために同じサイトストラクチャーを使って二つのサイトを書き出すがはじめてのタスクです。
+翻訳のコストを減らすために、同じサイトストラクチャーを使って二つのサイトを書き出すのがはじめてのタスクです。
 
 そのために `build.js` のファイルを書き換えましょう。今のビルドコードの
 
@@ -56,7 +56,7 @@ processFiles(SOURCE, TARGET, {
 })
 ```
 
-をこれにかきかえましょう
+をこれに書き換えましょう:
 
 ```JavaScript
 processFiles(SOURCE, path.join(TARGET, 'ja'), {
@@ -67,31 +67,31 @@ processFiles(SOURCE, path.join(TARGET, 'en'), {
 })
 ```
 
-そうすると `build` フォルダーには二つのサイトがビルドの後に入っています。
+そうするとビルドの後で `build` フォルダーには二つのサイトがに入っています。
 
 ## 文字化け
-今のテンプレートは文字コードが付いていません。普通は PHP などが [HTTP の ContentType ヘッダー](http://www.websec-room.com/2013/03/02/359)を送ってきています。ただいま開発中はフィアルをサーバにアップしないので HTML の中に [charset](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#attr-charset) のスペックが必要となります。
+今のテンプレートは文字コードが付いていません。普通は PHP などが [HTTP の ContentType ヘッダー](http://www.websec-room.com/2013/03/02/359)を送ってきています。サーバーを使えない場合は HTML の中に [charset](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#attr-charset) のスペックが必要となります。
 
 `template/header.html` に `<meta charset="utf-8" />` を第１行目につけてください。
 
 _メモ： meta の html タグの順番は大事です。Charset のタグは絶対に第一のタイトルタグにしてください。_
 
 ## 言語のコードを追加
-Google などはサイトは自分で探して選べることは不可能ではありません。Google が間違えないように [`lang`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang)のプロパティーを html タグにつけましょう。その言語うは [ISO 639](https://ja.wikipedia.org/wiki/ISO_639-1%E3%82%B3%E3%83%BC%E3%83%89%E4%B8%80%E8%A6%A7) のコードにしてください。
+Google などのクローラーは自分であなたのウェブサイトの言語を調べることがだいたいできます。そのクローラーが間違えないように [`lang`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang) のプロパティーを html タグにつけましょう。その言語は [ISO 639](https://ja.wikipedia.org/wiki/ISO_639-1%E3%82%B3%E3%83%BC%E3%83%89%E4%B8%80%E8%A6%A7) のコードにしてください。
 
-`<html>` を　`<html lang="...">`　に頑張ってください。
+`<html>` を　`<html lang="...">`　に変換してください。
 
-## alternateタグを追加
-SEOのために alternate リンクをページにつけるのが優先が高いです。Google の[三つの方法](https://support.google.com/webmasters/answer/189077?hl=ja)の中では htmlタグが試すためには簡単な方法です。alternateのタグはそれぞれの逆の言語のHTMLファイルをつながらないといけません。
+## alternate タグを追加
+SEO のために alternate リンクをページにつけるのは大事です。Google の[三つの方法](https://support.google.com/webmasters/answer/189077?hl=ja)の中では htmlタグがこのハンズオンのために一番簡単な方法です。 alternate のタグでそれぞれのページと別の言語のバーションにリンクします。
 
 例： `en/index.html` は `ja/index.html` にリンクして `ja/index.html` は `en/index.html` をリンクしないといけません。
 
-ヒント： `build.js` は `{{path}}` to `{{file}}` の変数を用意しています。
+_ヒント： `build.js` は `{{path}}` to `{{file}}` の変数を用意しています。_
 
 ## 言語のメニュー
-今のウエブサイトを公開して Google で検索したらちゃんとそれぞれのサイトを見つかるはずです。ただ、一応サイトのリンクは別の方法でもシェアできますのでその場合はユーザーが自分の言語を選ぶのが必要になります。
+今のウェブサイトを公開して Google で検索したら、それぞれのウェブサイトを見つけられるはずです。ただ、サイトのリンクは別の方法でもシェアできますので、その場合はユーザーが自分の言語を選ぶ必要があります。
 
-言語メニューは普通のメニューと同じく `<nav>` にしましょう。リンクは alternate のリンクと同じくにして。
+言語メニューは普通のメニューと同じく `<nav>` にしましょう。リンクは alternate のリンクと同じにしてください：
 
 ```html
 <nav>
@@ -99,20 +99,27 @@ SEOのために alternate リンクをページにつけるのが優先が高い
 </nav>
 ```
 
-それができたら面白いことがわかりやすいです。
-
 ## 言語の名前
-`en` と `ja` は技術者にはわかりやすいと思いますが普通は人間が言語の名前が好きです。
+`en` と `ja` は技術者にはわかりやすいと思いますが普通の人はちゃんとした名前を好みます。
 
-英語のサイトに(A) `English` と `Japanese` に選ぶか(B) `English` と `日本語` 選ぶ方法があります。(A) バーションは間違えています。日本語の方は `Japanese` が読めない日本人がいないかもしれません。知らない言語の名前は [ISO 639 の一覧](https://ja.wikipedia.org/wiki/ISO_639-1%E3%82%B3%E3%83%BC%E3%83%89%E4%B8%80%E8%A6%A7)に調べんた方がいいです。
+言語メニューの名前選ぶ方法は二つが考えられます:
 
-だから `build.js` に `en` のリンクのために新しいプロパティー `otherLangName` は `English` と `ja` のリンクは `日本語` に追加しましょう。そうして `template/nav.html` は
+  (A) `English` と `Japanese`
+  (B) `English` と `日本語`
+
+(A)バーションは間違いです。日本語の方々の中には `Japanese` が読めない
+人がいるかもしれません。
+
+`build.js` に英語版の新しいプロパティー `otherLangName` は `日本語` にしましょう。
+日本語版は `English` にしましょう。そして `template/nav.html` は
 
 ```html
 <a href="">{{otherLangName}}</a>`
 ```
 
 は使うようにしましょう。
+
+_ヒント：知らない言語の名前であれば [ISO 639 の一覧](https://ja.wikipedia.org/wiki/ISO_639-1%E3%82%B3%E3%83%BC%E3%83%89%E4%B8%80%E8%A6%A7)で調べましょう。_
 
 ## 残りのコンテンツを翻訳
 今まではテキストが相変わらず英語です。それを日本語にしましょう。まずは `src/index.html` と `src/product.html` のテキストを `build.js` にコピーしましょう。
@@ -393,14 +400,14 @@ _残念ながら Facebook の言語サッポートはサーバソフトなしで
 _メモ：`build`フォルダーの中のファイルをそのままにブラウザーで開いたら Facebook のボタんが出てきません。ウエブスペースにあげたら動くようになります。ローカルでサイトをテストしたい場合はパソこんにサーバを立ち上げてください。私は開発するためによく [`slr`]()を使います。_
 
 ## 最後の言葉
-**お疲れ様です！** この小さなサイトで一応翻訳ワークフローができましたと思います。それ以上は色々の細工がありますがこのワークフローを使うと一応自分のウエブサイトを翻訳できると思います。
+**お疲れ様です！** この小さなサイトで一応翻訳ワークフローができましたと思います。それ以上は色々の細工がありますがこのワークフローを使うと一応自分のウェブサイトを翻訳できると思います。
 
 ### 翻訳サービスについて
 「はい！サイトを翻訳したい！」と思うようになったらたぶん次の質問は「翻訳者どこで見つける？」となります。基本的に最近みつのオプションがあります。自分で翻訳するより専門者を使った方がと思います。
 
 - **オンライン翻訳サービス**:一般的に最近から翻訳用の[クラウドソーシングサービス](https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%A9%E3%82%A6%E3%83%89%E3%82%BD%E3%83%BC%E3%82%B7%E3%83%B3%E3%82%B0)があります。[gengo](https://gengo.com/ja/)はその中一番人気なサービスです。
 - **サイト翻訳サービス**: 
-ウエブサイトだけを翻訳するためのサービスも幾つかがあります。[localizejs](https://localizejs.com/ja/)は最近きになっています。
+ウェブサイトだけを翻訳するためのサービスも幾つかがあります。[localizejs](https://localizejs.com/ja/)は最近きになっています。
 - **翻訳オフィス**:
 テキスト翻訳のために以前のサービスが足りるかもしれません。ただ翻訳のはコンテンツだけではなく意味の翻訳のが大事だと思います。安心できるように本人を少なくともチェックするためにいると役に立っています。特に専門テキスト(契約など）は普通サービスが対応しなくてオフィスが必要になります。それぞれの言語のネーティブスピーカーがいいと思います。私は [Inscribe Language Consulting](http://www.inscribe-consulting.jp/) を使います。
 
