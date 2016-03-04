@@ -86,8 +86,13 @@ $ git clone https://github.com/kfug/handson -b try_jade
 
 ##### 作業ディレクトリに移動
 
+
 ```
-$ cd [zip ファイルを展開したディレクトリ]/handson/
+$ cd handson/
+
+// or
+
+$ cd [zip ファイルを展開したディレクトリ]/handson-try_jade/
 ```
 
 ##### パッケージのインストール
@@ -100,7 +105,7 @@ $ npm install
 
 編集するファイルはこちらにあります。
 
-handson/jade/index.jade
+`handson/jade/index.jade`
 
 ご使用されてるテキストエディターで、index.jade を開き、以下をコピペしてください。
 
@@ -338,13 +343,6 @@ head
 ```
 
 ```html
-<!-- jade/sample1/_footer.html -->
-<div id="footer">
-  <p>Copyright (c) KFUG</p>
-</div>
-```
-
-```jade
 <!-- jade/sample1/_footer.html -->
 <div id="footer">
   <p>Copyright (c) KFUG</p>
