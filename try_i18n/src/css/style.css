@@ -1,5 +1,6 @@
 html {
 	display: block;
+	width: 100%;
 	background: #359cdc;
 	background: -moz-linear-gradient(left, #359cdc 0%, #e45a3f 100%);
 	background: -webkit-linear-gradient(left, #359cdc 0%,#e45a3f 100%);
