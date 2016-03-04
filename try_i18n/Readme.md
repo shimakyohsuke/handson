@@ -335,7 +335,7 @@ var ALL_VARIABLES = readLangCSV('lang.csv', ['en', 'ja'])
 
 そうして `ALL_VARIABLES` の変数を `processFiles` に書き換えてください。
 
-```
+```JavaScript
 processFiles(SOURCE, path.join(TARGET, 'en'), ALL_VARIABLES.en)
 processFiles(SOURCE, path.join(TARGET, 'ja'), ALL_VARIABLES.ja)
 ```
