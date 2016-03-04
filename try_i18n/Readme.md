@@ -37,7 +37,7 @@ $ cd [ハンズオンの資料のディレクトリ]/try_i18n
 ### ハンズオンの使い方
 `try_i18n`のフォルダーに `build.js` というファイルが入っています。`build.js`はフレームワークとライブラリーなしで動いています。ハンズオン中は `build.js` をじるのが必要となります。
 
-`node build.js` を呼ぶと簡単なビルドが動いています。ビルドで `src` や `template` のフォルダーに入っているファイルを使って `build` フォルダーにウエブサイトを書き出しています。
+`node build.js` を呼ぶと **すごく簡単** なビルドが動いています。ビルドで `src` や `template` のフォルダーに入っているファイルを使って `build` フォルダーにウエブサイトを書き出しています。
 
 例えば: ソースフォルダーに入っている `index.html` は　`{{head}}` のプレースホルダーがあります。ビルド中には `{{head}}` が `fillPlaceHolder` の関数で `template/head.html` にリプレースされています。その上は `template/head.html` に ``{{title}}``というプレースホルダーが入っています。`build.js` の `VARIABLES` 変数に `title` というプロパティーが入っていますので　テンプレートの代わりにそれを使っています。
 
@@ -75,6 +75,142 @@ processFiles(SOURCE, path.join(TARGET, 'en'), {
 _メモ： meta の html タグの順番は大事です。Charset のタグは絶対に第一のタイトルタグにしてください。_
 
 ## 言語のコードを追加
-Google などはサイトは自分で探して選べることは不可能ではありません。Google が間違えないように [`lang`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang)のプロパティーを html タグにつけましょう。その言語うは [ISO 639](https://ja.wikipedia.org/wiki/ISO_639-1%E3%82%B3%E3%83%BC%E3%83%89%E4%B8%80%E8%A6%A7) のコードで書いてください。
+Google などはサイトは自分で探して選べることは不可能ではありません。Google が間違えないように [`lang`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang)のプロパティーを html タグにつけましょう。その言語うは [ISO 639](https://ja.wikipedia.org/wiki/ISO_639-1%E3%82%B3%E3%83%BC%E3%83%89%E4%B8%80%E8%A6%A7) のコードにしてください。
 
-## 
+`<html>` を　`<html lang="...">`　に頑張ってください。
+
+## alternateタグを追加
+SEOのために alternate リンクをページにつけるのが優先が高いです。Google の[三つの方法](https://support.google.com/webmasters/answer/189077?hl=ja)の中では htmlタグが試すためには簡単な方法です。alternateのタグはそれぞれの逆の言語のHTMLファイルをつながらないといけません。
+
+例： `en/index.html` は `ja/index.html` にリンクして `ja/index.html` は `en/index.html` をリンクしないといけません。
+
+ヒント： `build.js` は `{{path}}` to `{{file}}` の変数を用意しています。
+
+## 言語のメニュー
+今のウエブサイトを公開して Google で検索したらちゃんとそれぞれのサイトを見つかるはずです。ただ、一応サイトのリンクは別の方法でもシェアできますのでその場合はユーザーが自分の言語を選ぶのが必要になります。
+
+言語メニューは普通のメニューと同じく `<nav>` にしましょう。リンクは alternate のリンクと同じくにして。
+
+```html
+<nav>
+  <a href="...">...</a>
+</nav>
+```
+
+それができたら面白いことがわかりやすいです。
+
+## 言語の名前
+`en` と `ja` は技術者にはわかりやすいと思いますが普通は人間が言語の名前が好きです。
+
+英語のサイトに(A) `English` と `Japanese` に選ぶか(B) `English` と `日本語` 選ぶ方法があります。(A) バーションは間違えています。日本語の方は `Japanese` が読めない日本人がいないかもしれません。知らない言語の名前は [ISO 639 の一覧](https://ja.wikipedia.org/wiki/ISO_639-1%E3%82%B3%E3%83%BC%E3%83%89%E4%B8%80%E8%A6%A7)に調べんた方がいいです。
+
+だから `build.js` に `en` のリンクのために新しいプロパティー `otherLangName` は `English` と `ja` のリンクは `日本語` に追加しましょう。そうして `template/nav.html` は
+
+```html
+<a href="">{{otherLangName}}</a>`
+```
+
+は使うようにしましょう。
+
+## 残りのコンテンツを翻訳
+今まではテキストが相変わらず英語です。それを日本語にしましょう。まずは `src/index.html` と `src/product.html` のテキストを `build.js` にコピーしましょう。
+
+```JavaScript
+processFiles(SOURCE, path.join(TARGET, 'ja'), {
+  title: 'クール ホームページ',
+  lang: 'ja',
+  otherLang: 'en',
+  otherLangName: 'English',
+  index: {
+    title: '...',
+    content: '...'
+  },
+  product: {
+    title: '...',
+    content: '...'
+  }
+})
+```
+
+それができてから `src/index.html` や `src/product.html` のテキストを新しいプレスホルダーに書き換えましょう。
+
+```html
+<h1>{{index.title}}</h1>
+...
+```
+
+日本語のコンテンツは
+
+| ID              | 日本語                                             |
+|-----------------|---------------------------------------------------|
+| index.title     | Ｆｒｏｎｔｅｎｄ  Ｃｏｎｆｅｒｅｎｃｅ  ２０１６にようこぞ! |
+| index.content   | 今日は国際化を学びましょう。営業やエンタテインメントは海外とシェアしますように。私たちのスキルは関西のために大切です。|
+| product.title   | 発表ようの商品!                                     |
+| product.content | 何かを買わないといけません。買わないとどこからお金が入るの？ |
+
+## 残りの Nav を翻訳
+次のはすぐできると思います。コンテンツと同じくようにリンクの HTML タグを書き換えてください。
+
+```
+<a href="...">{{link.head}}</a>
+```
+ 
+| ID           | 日本語 |
+|--------------|-------|
+| link.home    | ホーム |
+| link.product | 商品  |
+
+## めんどくさい Google 翻訳バー
+Google Chromeを使っている方は絶対にGoogleの自動翻訳システムを見たことあるでしょう。
+
+[![https://gyazo.com/8941842cd6bf8345f8904eba25ecb4ad](https://i.gyazo.com/8941842cd6bf8345f8904eba25ecb4ad.gif)](https://gyazo.com/8941842cd6bf8345f8904eba25ecb4ad)
+
+ただ一つの html タグを head に追加したらそれを減らされます。以下のタグを `template/head.html` に追加してください。
+
+```html
+<meta name="google" content="notranslate" />
+```
+
+[![https://gyazo.com/6a976b0fcde6cb67f40ee1fd01d2bbc7](https://i.gyazo.com/6a976b0fcde6cb67f40ee1fd01d2bbc7.gif)](https://gyazo.com/6a976b0fcde6cb67f40ee1fd01d2bbc7)
+
+## CSS の他言語
+以前にも書いてありますがたまに言語によってスタイルシートを書き換えた方がいいです。スタイルシートは大きくなったらそれぞれの言語に分けた方がいいと思いますが例のCSSは小さくて一つのシートでは問題ないです。
+
+以前は HTML タグに `lang`のプロパティーを追加したから英語と日本語のサイトのフォントサイズが変わりました。
+
+[![https://gyazo.com/0ad691fa108c96bd254a8c396d4da22c](https://i.gyazo.com/0ad691fa108c96bd254a8c396d4da22c.gif)](https://gyazo.com/0ad691fa108c96bd254a8c396d4da22c)
+
+だからフォントサイズ合わせましょう。
+
+```CSS
+html {
+  font-size: 14px;
+  line-height: 1.5em;
+}
+```
+
+そうして例のために日本版を
+
+```CSS
+html[lang=ja] {
+  -ms-writing-mode: tb-rl;
+  writing-mode: vertical-rl;
+}
+```
+
+にすると日本版は横になっています。バンザーイ！
+[![https://gyazo.com/7bfdc525f57a046a6671c0a03ac73bc9](https://i.gyazo.com/7bfdc525f57a046a6671c0a03ac73bc9.png)](https://gyazo.com/7bfdc525f57a046a6671c0a03ac73bc9)
+
+## リダイレクトのサイト
+
+
+
+## 自動リダイレクト
+
+## JSONの代わりにCSV
+
+## Googleのテーブるシェア
+
+## Facebook 用の OGP タグ
+
+
