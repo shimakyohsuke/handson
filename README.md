@@ -1,13 +1,11 @@
 # Jade で始める新しい HTML の書き方
 
-## Jade とは
-
-Jade - Template Engine  
-<http://jade-lang.com/>
-
 - Jade は Node.js 製のテンプレートエンジンです。
 - [Haml](http://haml.info/) などに見られるような、インデントで要素の階層を表す構文で初めての人にはとっつきにくい面もアリますが、多様な機能など、静的サイト制作を強力に支援する機能があります。
 - Dreamweaver のテンプレート機能のように **共通部分の変更に強い静的サイトを作ることが可能です。**
+
+Jade - Template Engine  
+<http://jade-lang.com/>
 
 ## HTML がこんな風に書けます！
 
@@ -195,7 +193,10 @@ html
       li: a(href="http://kfug.jp/frontconf2016/") link
 ```
 
-### 変数が使える
+
+[CodePen で見る](http://codepen.io/shimakyohsuke/pen/WwQraX)
+
+### 変数
 
 ```
 //- index.jade
@@ -212,6 +213,8 @@ html
     p I love #{author}
     p Todays event is #{theGreat} !
 ```
+
+[CodePen で見る](http://codepen.io/shimakyohsuke/pen/oxjbJN)
 
 ### Iteration（繰り返し処理）
 
@@ -238,6 +241,38 @@ html
         li= index + ': ' + val
 ```
 
+[CodePen で見る](http://codepen.io/shimakyohsuke/pen/yOYeZq)
+
+#### 個人的によく使うやつ
+
+```
+select(name="birthday_year", required)
+  option(value='', selected='selected') -
+    - var n = 1990
+    while n <= 2016
+      option(value=n + '年')
+        =n++
+        | 年
+
+select(name="birthday_month", required)
+  option(value='', selected='selected') -
+    - var n = 1
+    while n <= 12
+      option(value=n + '月')
+        =n++
+        | 月
+
+select(name="birthday_day", required)
+  option(value='', selected='selected') -
+    - var n = 1
+    while n <= 31
+      option(value=n + '日')
+        =n++
+        | 日
+```
+
+[CodePen で見る](http://codepen.io/shimakyohsuke/pen/RaWawo)
+
 ### Filters
 
 <http://jade-lang.com/reference/filters/>
@@ -262,19 +297,7 @@ html
         console.log 'This is CoffeeScript'
 ```
 
-```
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Try Jade ハンズオン</title>
-  </head>
-  <body>
-    <h1>Markdown が書けた</h1>
-    <p>文章が入ります。</p>
-    <script>console.log('This is CoffeeScript')</script>
-  </body>
-</html>
-```
+※CodePen ではみれません。
 
 ----
 
@@ -333,6 +356,8 @@ head
 </html>
 ```
 
+※CodePen ではみれません。
+
 ### Extends（テンプレートの継承）
 
 <http://jade-lang.com/reference/extends/>
@@ -379,6 +404,8 @@ block content
 </html>
 ```
 
+※CodePen ではみれません。
+
 ### Mixins
 
 <http://jade-lang.com/reference/mixins/>
@@ -393,17 +420,11 @@ ul
   +pet('pig')
 ```
 
-コンパイル後の HTML
+[CodePen で見る](http://codepen.io/shimakyohsuke/pen/LNpGaY)
 
-```
-<ul>
-  <li class="pet">cat</li>
-  <li class="pet">dog</li>
-  <li class="pet">pig</li>
-</ul>
-```
+#### 個人的によく使うやつ
 
-個人的によく使うやつ
+グローバルナビなどに。
 
 ```
 mixin gnav(id, ...items)
@@ -412,9 +433,7 @@ mixin gnav(id, ...items)
       li
         a(href="#{item.dir}")
           | !{item.pageName}
-```
 
-```
 +gnav(
   'gnav',
   {pageName: 'TOP', dir: 'http://example.com/'},
@@ -422,14 +441,38 @@ mixin gnav(id, ...items)
 )
 ```
 
-コンパイル後の HTML
+[CodePen で見る](http://codepen.io/shimakyohsuke/pen/MyaKRP)
+
+
+パンくずリスト
 
 ```
-<ul class="gnav">
-  <li><a href="http://example.com/">TOP</a></li>
-  <li><a href="http://example.com/about/">ABOUT</a></li>
-</ul>
+mixin breadcrumb(...items)
+  nav
+    .breadcrumbs
+      div(itemscope='itemscope', itemtype='http://data-vocabulary.org/Breadcrumb')
+        a(href='/', itemprop='url')
+          span(itemprop='title')
+            | Home
+        | &gt;
+      each item in items
+        div(itemscope='itemscope', itemtype='http://data-vocabulary.org/Breadcrumb')
+          a(href='/#{item.dir}', itemprop='url')
+            if(item.next)
+              span(itemprop='title')
+                | #{item.pageName}
+              | &gt;
+            else
+              span(itemprop='title')
+                | #{item.pageName}
+
++breadcrumb(
+  {pageName: '2階層目', dir: 'second/', next: true},
+  {pageName: '3階層目', dir: 'third/', next: false}
+)
 ```
+
+[CodePen で見る](http://codepen.io/shimakyohsuke/pen/xVwVVb/)
 
 ----
 
