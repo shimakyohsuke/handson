@@ -212,9 +212,13 @@ processFiles(path.join(ROOT, 'global'), TARGET, {})
 
 ```html
 <html>
+  <head>
+    <meta charset="utf8">
+    <link rel="stylesheet" href="en/css/style.css">
+  </head>
   <body>
-    <a href="en">English</a>
-    <a href="ja">日本語</a>
+    <a href="en/index.html">English</a>
+    <a href="ja/index.html">日本語</a>
   </body>
 </html>
 ```
