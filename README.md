@@ -307,23 +307,23 @@ html
 
 <http://jade-lang.com/reference/includes/>
 
-jade/ ディレクトリ内に includes/ ディレクトリを作成します。
+**jade/ ディレクトリ内に sample2/ ディレクトリを作成します。**
 
 ```
-//- jade/index.jade
+//- jade/sample1/index.jade
 doctype html
 html
   //- ここで head.jade を呼び出し
-  include ./includes/_head.jade
+  include ./_head.jade
   body
     h1 Try Jade ハンズオン
-    p Welcome to my super lame site.
-    //- ここで foot.jade を呼び出し
-    include ./includes/_foot.jade
+    p Hello! Jade
+    //- ここで _footer.html を呼び出し
+    include ./_footer.html
 ```
 
 ```
-//- jade/includes/_head.jade
+//- jade/sample1/_head.jade
 head
   title Try Jade ハンズオン
   script(src='/javascripts/jquery.js')
@@ -331,9 +331,10 @@ head
 ```
 
 ```
-//- jade/includes/_foot.jade
-#footer
-  p Copyright (c) foobar
+<!-- jade/sample1/_footer.html -->
+<div id="footer">
+  <p>Copyright (c) KFUG</p>
+</div>
 ```
 
 コンパイル後の HTML
@@ -347,10 +348,10 @@ head
     <script src='/javascripts/app.js'></script>
   </head>
   <body>
-    <h1>My Site</h1>
-    <p>Welcome to my super lame site.</p>
+    <h1>Try Jade ハンズオン</h1>
+    <p>Hello! Jade</p>
     <div id="footer">
-      <p>Copyright (c) foobar</p>
+      <p>Copyright (c) KFUG</p>
     </div>
   </body>
 </html>
@@ -362,8 +363,10 @@ head
 
 <http://jade-lang.com/reference/extends/>
 
+**jade/ ディレクトリ内に sample2/ ディレクトリを作成します。**
+
 ```
-//- _layout.jade
+//- jade/sample2/_layout.jade
 doctype html
 html
   head
@@ -377,7 +380,7 @@ html
 ```
 
 ```
-//- index.jade
+//- jade/sample2/index.jade
 extends ./_layout.jade
 
 //- _layout.jade の title を上書きしてます。
