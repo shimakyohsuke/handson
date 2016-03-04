@@ -122,3 +122,35 @@ function getTemplate (variables, name) {
   }
   return _templates[name]
 }
+
+function readLangCSV (file, languages) {
+  var result = {}
+  readCSV(file).forEach((line) => {
+    languages.forEach((lang) => {
+      var tree = [lang].concat((line.id || '').split('.'))
+      var parent = result
+      for (var i = 0; i < tree.length - 1; i++) {
+        var parentKey = tree[i]
+        if (!parent[parentKey]) parent[parentKey] = {}
+
+        parent = parent[parentKey]
+      }
+      parent[tree[tree.length - 1]] = line[lang]
+    })
+  })
+  return result
+}
+
+function readCSV (file) {
+  var csvParse
+
+  try {
+    csvParse = require('csv-parse/lib/sync')
+  } catch (e) {
+    throw new Error('`npm init y; npm i csv-parse` を読んでください。')
+  }
+  return csvParse(fs.readFileSync(path.join(ROOT, file), 'utf8'), {
+    skip_empty_lines: true,
+    columns: true
+  })
+}
