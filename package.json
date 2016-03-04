@@ -1,10 +1,11 @@
 {
   "name": "try_jade",
   "version": "1.0.0",
-  "description": "",
+  "description": "FRONTEND CONFERENCE 2016 - Jade Handson",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "jade": "gulp jade"
   },
   "author": "",
   "license": "ISC",

@@ -1,10 +1,12 @@
-var gulp = require("gulp")
-var jade = require("gulp-jade")
+'use strict';
 
-gulp.task("jade",function(){
-    gulp.src(["./jade/**/*.jade","!./jade/**/_*"])
+var gulp = require("gulp");
+var jade = require("gulp-jade");
+
+gulp.task("jade", function(){
+    gulp.src(["./jade/**/*.jade", "!./jade/**/_*"])
         .pipe(jade({
             pretty: true
         }))
-        .pipe(gulp.dest("./public/"))
-})
+        .pipe(gulp.dest("./public/"));
+});
