@@ -41,6 +41,8 @@ $ cd [ハンズオンの資料のディレクトリ]/try_i18n
 
 例えば: ソースフォルダーに入っている `index.html` は　`{{head}}` のプレースホルダーがあります。ビルド中には `{{head}}` が `fillPlaceHolder` の関数で `template/head.html` にリプレースされています。その上は `template/head.html` に ``{{title}}``というプレースホルダーが入っています。`build.js` の `VARIABLES` 変数に `title` というプロパティーが入っていますので　テンプレートの代わりにそれを使っています。
 
+ハンズオンの間は一つ一つのステップの後に幾つか `node build.js` を読んでください。`build` の中ファイルはそのままにブラウザーに見てください。チェンジがすぐ見たい場合は `slr` 見たいなウエッブサーバを使ってもいいと思います。(インストールは `npm i slr -g`、動かすは `slr build`)
+
 _メモ：全ての JavaScript コードは [standard](https://github.com/feross/standard) フォーマッティングにフォマットしています。_
 
 ## 二つ目のバーション
