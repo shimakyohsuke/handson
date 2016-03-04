@@ -297,7 +297,7 @@ function getBrowserLanguage () {
 CSV を Node で使うために [`csv-parse`](https://www.npmjs.com/package/csv-parse) パッケージを `try_i18n` のフォルダーにインストールしないといけません。
 
 ```
-$ echo "{}" > package.json; npm i csv-parse
+$ npm init -y; npm i csv-parse
 ```
 
 そうしてデータを `lang.csv` に書き換えましょう。
