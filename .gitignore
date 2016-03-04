@@ -1,1 +1,4 @@
 try_i18n/build
+try_i18n/node_modules
+try_i18n/lang.csv
+try_i18n/package.json
