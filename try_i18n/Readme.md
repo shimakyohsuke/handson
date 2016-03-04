@@ -291,7 +291,54 @@ function getBrowserLanguage () {
 </script>
 ```
 
-## JSONの代わりにCSV
+## JSON の代わりに CSV
+今までは `build.js` のデータはただの JavaScript オブジェクトです翻訳者にそれを渡すのが難しです。CSV データに書き換えるとこれからのプロゼスが簡単になります。
+
+CSV を Node で使うために [`csv-parse`](https://www.npmjs.com/package/csv-parse) パッケージを `try_i18n` のフォルダーにインストールしないといけません。
+
+```
+$ echo "{}" > package.json; npm i csv-parse
+```
+
+そうしてデータを `lang.csv` に書き換えましょう。
+
+```csv
+id,en,ja
+title,"Cool Homepage","クール ホームページ"
+lang,en,ja
+otherLang,ja,en
+otherLangName,日本語,English
+index.title,"Welcome to the Frontend Conference 2016!","Ｆｒｏｎｔｅｎｄ  Ｃｏｎｆｅｒｅｎｃｅ  ２０１６にようこぞ!"
+index.content,"Today we will study internationalization to bring commerce and entertainment from and to Osaka. Our skill is important for making Kansai better.","今日は国際化を学びましょう。営業やエンタテインメントは海外とシェアしますように。私たちのスキルは関西のために大切です。"
+product.title,"Product for the conference!","発表ようの商品!"
+product.content,"Because you will need to buy something, else it isn't gonna pay for itself.","何かを買わないといけません。買わないとどこからお金が入るの？"
+link.home,"Home","ホーム"
+link.product,"Product","商品"
+```
+
+`build.js` のCSV用の変数 `readLangCSV` は用意してあります。
+
+```JavaScript
+var ALL_VARIABLES = readLangCSV('lang.csv', ['en', 'ja'])
+```
+
+結果このようなオブジェクトになります。
+
+```JavaScript
+{ en:
+   { title: 'Cool Homepage',
+     ... } },
+  ja:
+   { title: 'クール ホームページ',
+     ... } }
+```
+
+そうして `ALL_VARIABLES` の変数を `processFiles` に書き換えてください。
+
+```
+processFiles(SOURCE, path.join(TARGET, 'en'), ALL_VARIABLES.en)
+processFiles(SOURCE, path.join(TARGET, 'ja'), ALL_VARIABLES.ja)
+```
 
 ## Googleのテーブるシェア
 
