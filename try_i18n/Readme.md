@@ -375,6 +375,7 @@ _残念ながら Facebook の言語サッポートはサーバソフトなしで
 [`og`](http://ogp.me/)タグがサイトについてからはサイトもシェアしたいですよね。そのまま [Facebook のシェアスクリプト](https://developers.facebook.com/docs/plugins/like-button)を使って Like ボタンをつけたら `en_GB` のUIがでってきます。
 
 ```html
+<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
