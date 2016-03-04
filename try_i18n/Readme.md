@@ -359,7 +359,7 @@ CSV ファイルを GIT またはメールで管理するのワークフロー�
 
 [![https://gyazo.com/12029c546e04d7525452a828ace036e8](https://i.gyazo.com/12029c546e04d7525452a828ace036e8.gif)](https://gyazo.com/12029c546e04d7525452a828ace036e8)
 
-## Facebook 用の OGP タグ
+## Facebook 用の OG タグ
 Google だけではなくて Facebook も国際化のルールがあります。まずは FB は全ての ISO 639 の
 言語を[対応していません](https://developers.facebook.com/docs/internationalization#locales)。[言語の XML](http://www.facebook.com/translations/FacebookLocales.xml)をチェックすると `en` の代わりに `en_US` とかを使わないといけません。 `ja` は `ja_JP` になります。
 
