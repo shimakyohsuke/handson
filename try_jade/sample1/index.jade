@@ -1,21 +1,10 @@
+//- jade/sample1/index.jade
 doctype html
-html(lang='en')
-  head
-    title Jade
-    script(type='text/javascript').
-      foo = true;
-      bar = function () {};
-      if (foo) {
-        bar(1 + 5)
-      }
+html
+  //- ここで _header.jade を呼び出し
+  include ./_header.jade
   body
-    include ./_header.jade
-    h1 Jade - node template engine
-    #container.col
-      p You are amazing
-      p
-        | Jade is a terse and simple
-        | templating language with a
-        | strong focus on performance
-        | and powerful features.
+    h1 Try Jade ハンズオン
+    p Welcome to my super lame site.
+    //- ここで _footer.html を呼び出し
     include ./_footer.html
