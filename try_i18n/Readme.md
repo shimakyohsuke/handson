@@ -412,3 +412,4 @@ _メモ：`build`フォルダーの中のファイルをそのままにブラウ
 - Grunt: [grunt-static-i18n](https://www.npmjs.com/package/grunt-static-i18n), [grunt-i18n](https://www.npmjs.com/package/grunt-i18n), [grunt-i18n-gspreadsheet](https://www.npmjs.com/package/grunt-i18n-gspreadsheet), [...](https://www.npmjs.com/search?q=grunt+i18n)
 - Gulp: [gulp-i18n](https://www.npmjs.com/package/gulp-i18n), [gulp-i18n-gspreadsheet](https://www.npmjs.com/package/gulp-i18n-gspreadsheet), [gulp-i18n-localize](https://www.npmjs.com/package/gulp-i18n-localize), [...](https://www.npmjs.com/search?q=gulp+i18n)
 - 翻訳 API: [gengo](https://gengo.com/ja/developers/), [localizejs](https://help.localizejs.com/docs/installation)
+- 国の旗: [flag-icon-css](http://lipis.github.io/flag-icon-css/), [FAMFAMFAM Flag Icons](http://tkrotoff.github.io/famfamfam_flags/), [243 country icons](http://365icon.com/icon-styles/ethnic/classic2/)
