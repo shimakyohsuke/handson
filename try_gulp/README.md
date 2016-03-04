@@ -9,7 +9,7 @@ Gulp 公式サイト
 
 [http://gulpjs.com/]()
 
-## はじめに
+## 00.はじめに
 
 サンプルファイルを[ダウンロード](https://github.com/kfug/handson/archive/gulp.zip)するか、git経由でcloneしてきます。
 
@@ -25,7 +25,7 @@ $ cd [ハンズオンの資料のディレクトリ]/try_gulp
 
 とコマンドを使用し、```try_gulp```ディレクトリに入りましょう。
 
-## Sassのコンパイルを試してみよう
+## 01.Sassのコンパイルを試してみよう
 
 ### Sassを、ふつうに使ってみる
 まずは、普通にSassを試してみましょう。
@@ -59,6 +59,35 @@ $ sass assets/scss/common.scss:public/css/common.css
 
 GulpはNode.js製のツールなので、npmという管理ツールのコマンドで用意していきましょう。
 
+
+#### Gulp本体のダウンロード
+
+さっそく、Gulpをインストールしてみましょう。
+
+```
+$ sudo npm install --global gulp-cli
+```
+
+上記コマンドを使うことで、Gulp本体がマシンにインストールされます。（Windowsの場合は``sudo``外してください。）
+
+まずは、Node.jsを使用する際に必要になる管理ツールを初期化しておきます。
+
+```
+$ npm init
+```
+
+このコマンドを打ってみましょう。
+
+コマンドライン上でいくつか質問されますが、ぜんぶ``Enter``で大丈夫です。
+管理したくなったときに学んでみてください。
+
+```
+$ npm install --save-dev gulp
+```
+
+このコマンドで、これから作業するディレクトリでGulpが使える様になります。
+
+これから先、``gulp``を実行するのは、この``gulpfile.js``のあるディレクトリになります。
 
 #### Gulp用のsassコンパイラのダウンロード
 
@@ -99,7 +128,7 @@ $ gulp sass
 
 このように、``gulpfile.js``に設定を最初に書き込んでおくので、実行するコマンドはとても短くて済むのがよいところです。
 
-## watchして処理を自動化
+## 02. watchして処理を自動化
 
 先ほど、ファイルを変更 → コマンドを打つ、の順番でコンパイルしましたが、ファイルを変えるたびにコマンドを打つのはちょっと面倒です。
 ファイルが変わったのを検知して、自動でコンパイルが実行されるようにしましょう。
@@ -126,9 +155,25 @@ $ gulp sass-watch
 
 ターミナルが動いて、sassタスクが走ったら正解です。``public/css/common.css``を確認すると、変更が反映されています。
 
-## Browser Syncの導入
+## 03. Browser Syncの導入
 
 今度は、ブラウザで変更を確認できるようにしましょう。
+
+先に、``public`` ディレクトリの中に``css/common.css``を読み込む``index.html``を作成しておいてください。
+
+```
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+	<h1>Try Gulp</h1>
+</body>
+</html>
+```
 
 一度、``sass-watch``を止めるために``ctrl + c``でターミナルを止めましょう。
 
@@ -205,7 +250,7 @@ $ gulp
 
 
 
-## Jadeのコンパイル
+## 04. Jadeのコンパイル
 
 それでは、Sass以外のものもコンパイルしてみませんか。一緒に実行できるので便利ですよ。
 
@@ -223,7 +268,7 @@ $ npm install --save-dev gulp-jade
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var browser = require('browser-sync');
-var jade = require('gulp-jade');	// ← jadeという名前をつけてGulp-jadeを読み込み
+var jade = require('gulp-jade');	// ← jadeという名前をつけてgulp-jadeを読み込み
 
 ......
 // sassのタスクは変更ないので省略
@@ -231,11 +276,11 @@ var jade = require('gulp-jade');	// ← jadeという名前をつけてGulp-jade
 
 gulp.task('jade', function () {// ← jadeというタスクをつくります宣言。
 
-    gulp.src('./assets/tmpl/*jade')// ← このディレクトリにいる拡張子が「jade」のファイルが対象
+    gulp.src('assets/tmpl/*jade')// ← このディレクトリにいる拡張子が「jade」のファイルが対象
         .pipe(jade({	// ← jadeをつかう
             pretty: true	// ← 吐き出す時のコードに、改行やインデントを生かす設定
         }))
-        .pipe(gulp.dest('./public'))// ← このディレクトリに吐き出す
+        .pipe(gulp.dest('public'))// ← このディレクトリに吐き出す
         .pipe(browser.reload({stream:true}));// ← browserのreloadという機能を呼び出す
 });
 
@@ -260,7 +305,7 @@ $ gulp
 sassの時と同様、保存と同時にブラウザがリロードされて、変更が確認できたら正解です。
 ``public/index.html``を見ると、jadeから生成されたファイルに変わっていることが確認できます。
 
-## JSの圧縮
+## 05. JSの圧縮
 
 JavaScriptの圧縮にも手を出してみましょう。``gulpfile.js``を
 触るときには``ctrl + c``でGulpの動作を一度止めましょう。
@@ -278,7 +323,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var browser = require('browser-sync');
 var jade = require('gulp-jade');
-var uglify = require('gulp-uglify');	// ← uglifyという名前をつけてGulp-uglifyを読み込み
+var uglify = require('gulp-uglify');	// ← uglifyという名前をつけてgulp-uglifyを読み込み
 
 
 ......
@@ -286,7 +331,7 @@ var uglify = require('gulp-uglify');	// ← uglifyという名前をつけてGul
 ......
 
 gulp.task('js', function() {	// ← jsというタスクをつくります宣言。
-    gulp.src('./assets/js/*.js')	// ← このディレクトリにいる拡張子が「js」のファイルが対象
+    gulp.src('assets/js/*.js')	// ← このディレクトリにいる拡張子が「js」のファイルが対象
         .pipe(uglify())	// ← uglifyをつかう
         .pipe(gulp.dest('./public/js'))// ← このディレクトリに吐き出す
         .pipe(browser.reload({stream:true}));// ← browserのreloadという機能を呼び出す
@@ -312,7 +357,7 @@ $ gulp
 
 を実行しましょう。``assets/js/script.js``を編集すると、``public/js/script.js``が吐き出されて、ブラウザがリロードします。
 
-## 画像の圧縮とかも出来ます
+## 06. 画像の圧縮とかも出来ます
 
 画像圧縮のパッケージはたくさん種類があるのですが、今回は``gulp-imagemin``を使用してみます。一度``ctrl + c``でGulpの動作を一度止めましょうね。
 
@@ -338,11 +383,11 @@ var pngquant = require('imagemin-pngquant');	// ← pngquantという名前を�
 // sass,jade,jsのタスクは変更ないので省略
 ......
 gulp.task('image', function() {	// ← imageというタスクをつくります宣言。
-    gulp.src('./assets/images/*')	// ← このディレクトリにいるファイルが対象
+    gulp.src('assets/images/*')	// ← このディレクトリにいるファイルが対象
         .pipe(imagemin({	// ← imageminをつかう
             use: [pngquant()]	// ← pngquantプラグインを使う
         }))
-        .pipe(gulp.dest('./public/images'))// ← このディレクトリに吐き出す
+        .pipe(gulp.dest('public/images'))// ← このディレクトリに吐き出す
         .pipe(browser.reload({stream:true}));// ← browserのreloadという機能を呼び出す
 });
 ......
@@ -363,11 +408,15 @@ $ gulp
 
 を実行します。
 
-実行後に、``assets/images/``以下の画像ファイルのサイズと``public/images/``以下の画像ファイルサイズを比べて見てみましょう。サイズが小さくなっていたら成功です。
+実行後に``assets/images/``に、画像を追加・削除してみると、gulpが走って``public/images/``が作られるのがわかります。
 
-## 差分を見つけて、実行したい
+``assets/images/``以下の画像ファイルのサイズと``public/images/``以下の画像ファイルサイズを比べて見てみましょう。サイズが小さくなっていたら成功です。
 
-製作中のサイト内に画像が増えてくると、画像を追加するたびに生成しているととても時間がかかってきます。生成前と生成後のフォルダを比較して、違いがあったらその分を生成、という``gulp-changed``というパッケージを入れてみましょう。
+## 07. 差分を見つけて、実行したい
+
+上記で何度か画像を追加してみましょう。``public/images/``の画像は全てタイムスタンプが同じになっていると思います。画像を追加するたびに、全ての画像を生成しているためです。
+
+製作中のサイト内に画像が増えてくると、画像を追加するたびに全ての画像生成しているととても時間がかかってきます。生成前と生成後のフォルダを比較して、違いがあったらその分を生成、という``gulp-changed``というパッケージを入れてみましょう。
 
 ```
 $ npm install --save-dev gulp-changed
@@ -388,13 +437,13 @@ var changed  = require('gulp-changed');	// ← changedという名前をつけ�
 ......
 
 gulp.task('image', function() {
-    gulp.src('./assets/images/*.{png,jpg,gif}')
-        .pipe(changed('./public/images'))// ← public/imagesディレクトリに対して、changedをつかう
+    gulp.src('assets/images/*.{png,jpg,gif}')
+        .pipe(changed('public/images'))// ← public/imagesディレクトリに対して、changedをつかう
         .pipe(imagemin({
             progressive: true,
             use: [pngquant()]
         }))
-        .pipe(gulp.dest('./public/images'))
+        .pipe(gulp.dest('public/images'))
         .pipe(browser.reload({stream:true}));
 });
 
@@ -405,3 +454,8 @@ gulp.task('image', function() {
 ```
 
 これで、差分だけに``gulp-imagemin``が実行されるようになりました。
+``assets/images/``以下に画像を追加してみてください。``public/images/``の中では追加された画像だけタイムスタンプが変わっているはずです。
+
+このようにして、Gulpでは様々なタスクを一度に実行できるようになります。[http://gulpjs.com/plugins/]()で様々なパッケージを見つけて、サクサクな開発環境を自分のモノにしていきましょう！
+
+* このハンズオンが終了した後の``gulpfile.js``と``package.json``は、``/done-files/``の中に格納されています。参考にしてみてください。
