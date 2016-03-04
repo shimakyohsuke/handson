@@ -340,8 +340,13 @@ processFiles(SOURCE, path.join(TARGET, 'en'), ALL_VARIABLES.en)
 processFiles(SOURCE, path.join(TARGET, 'ja'), ALL_VARIABLES.ja)
 ```
 
-## Googleのテーブるシェア
+## CSV を Google で管理する
+CSV ファイルを GIT またはメールで管理するのワークフローは翻訳者には不便なことがあります。
+[Google Spreadsheets](https://docs.google.com/spreadsheets/)を使うと幾つかのいいことがあります。今の CSV データ
 
 ## Facebook 用の OGP タグ
+
+## 最後の言葉
+
 
 
