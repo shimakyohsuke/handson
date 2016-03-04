@@ -223,6 +223,14 @@ processFiles(path.join(ROOT, 'global'), TARGET, {})
 </html>
 ```
 
+## ルートへのバックリンク
+ルートサイトがあるんですが SEO のために `en` と `ja` のサイトにルートへのリンクをつけましょう（詳しくは [Googleのサイト](https://support.google.com/webmasters/answer/189077?hl=ja)に)。バックリンクは `x-default` の link ヘッダータグです。
+
+```html
+<link rel="alternate" href="../" hreflang="x-default" />
+```
+
+そのリンクは `template/head.html` につけましょう。
 
 ## 自動リダイレクト
 
