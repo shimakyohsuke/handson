@@ -11,7 +11,7 @@ Jade - Template Engine
 
 Jade でマークアップ！
 
-```
+```jade
 doctype html
 html(lang='en')
   head
@@ -35,7 +35,7 @@ html(lang='en')
 
 Jade ファイルが変換されたらこうなります。
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -104,7 +104,7 @@ handson/jade/index.jade
 
 ご使用されてるテキストエディターで、index.jade を開き、以下をコピペしてください。
 
-```
+```jade
 //- index.jade
 doctype html
 html(lang='en')
@@ -120,13 +120,13 @@ html(lang='en')
 
 以下コマンドを実行
 
-```
+```bash
 $ gulp jade
 ```
 
 もしくは、
 
-```
+```bash
 $ npm run jade
 ```
 
@@ -150,7 +150,7 @@ $ npm run jade
 
 ※以下サンプルコード内の半角スペースは必ず必要です。
 
-```
+```jade
 //- index.jade
 doctype html
 html
@@ -197,7 +197,7 @@ html
 
 ### 変数
 
-```
+```jade
 //- index.jade
 doctype html
 html
@@ -219,7 +219,7 @@ html
 
 <http://jade-lang.com/reference/iteration/>
 
-```
+```jade
 //- index.jade
 doctype html
 html
@@ -244,7 +244,7 @@ html
 
 #### 個人的によく使うやつ
 
-```
+```jade
 select(name="birthday_year", required)
   option(value='', selected='selected') -
     - var n = 1990
@@ -278,7 +278,7 @@ select(name="birthday_day", required)
 
 ※Markdown や CoffeeScript を Jade ファイル内に記述し HTML に変換する場合は、別途必要なパッケージがございます。
 
-```
+```jade
 doctype html
 html
   head
@@ -316,7 +316,7 @@ handson/sample1/_footer.html
 
 **jade/ ディレクトリ内に sample1/ ディレクトリを作成し以下を作成します。**
 
-```
+```jade
 //- jade/sample1/index.jade
 doctype html
 html
@@ -329,7 +329,7 @@ html
     include ./_footer.html
 ```
 
-```
+```jade
 //- jade/sample1/_head.jade
 head
   title Try Jade ハンズオン
@@ -337,14 +337,14 @@ head
   script(src='/javascripts/app.js')
 ```
 
-```
+```html
 <!-- jade/sample1/_footer.html -->
 <div id="footer">
   <p>Copyright (c) KFUG</p>
 </div>
 ```
 
-```
+```jade
 <!-- jade/sample1/_footer.html -->
 <div id="footer">
   <p>Copyright (c) KFUG</p>
@@ -353,13 +353,13 @@ head
 
 3ファイル書けたら、以下コマンドを実行
 
-```
+```bash
 $ gulp jade
 ```
 
 もしくは、
 
-```
+```bash
 $ npm run jade
 ```
 
@@ -367,7 +367,7 @@ $ npm run jade
 
 コンパイル後の HTML
 
-```
+```html
 <!doctype html>
 <html>
   <head>
@@ -400,7 +400,7 @@ handson/sample2/_layout.jade
 
 **jade/ ディレクトリ内に sample2/ ディレクトリを作成し以下を作成します。**
 
-```
+```jade
 //- jade/sample2/_layout.jade
 doctype html
 html
@@ -414,7 +414,7 @@ html
     block content
 ```
 
-```
+```jade
 //- jade/sample2/index.jade
 extends ./_layout.jade
 
@@ -429,13 +429,13 @@ block content
 
 3ファイル書けたら、以下コマンドを実行
 
-```
+```bash
 $ gulp jade
 ```
 
 もしくは、
 
-```
+```bash
 $ npm run jade
 ```
 
@@ -443,7 +443,7 @@ $ npm run jade
 
 コンパイル後の HTML
 
-```
+```html
 <!doctype html>
 <html>
   <head>
@@ -462,7 +462,7 @@ $ npm run jade
 
 <http://jade-lang.com/reference/mixins/>
 
-```
+```jade
 mixin pet(name)
   li.pet= name
 
@@ -478,7 +478,7 @@ ul
 
 グローバルナビなどに。
 
-```
+```jade
 mixin gnav(id, ...items)
   ul(class=id)
     each item in items
@@ -497,7 +497,7 @@ mixin gnav(id, ...items)
 
 パンくずリスト
 
-```
+```jade
 mixin breadcrumb(...items)
   nav
     .breadcrumbs
