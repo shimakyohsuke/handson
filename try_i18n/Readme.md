@@ -202,7 +202,22 @@ html[lang=ja] {
 [![https://gyazo.com/7bfdc525f57a046a6671c0a03ac73bc9](https://i.gyazo.com/7bfdc525f57a046a6671c0a03ac73bc9.png)](https://gyazo.com/7bfdc525f57a046a6671c0a03ac73bc9)
 
 ## リダイレクトのサイト
+今までのサイトは `/en/` または `/ja` を使わないとアクセスできません。それをこれから改善しましょう。`/` サイトに特別のページを用意しましょう。まずは `build.js` に新しいステップをつけましょう。
 
+```
+processFiles(path.join(ROOT, 'global'), TARGET, {})
+```
+
+この業をつけると `global` フォルダーをルートに書き出してきます。`global` というフォルダーはまだないので作ってください。そうして `global` に `index.html` を作りましょう。
+
+```html
+<html>
+  <body>
+    <a href="en">English</a>
+    <a href="ja">日本語</a>
+  </body>
+</html>
+```
 
 
 ## 自動リダイレクト
