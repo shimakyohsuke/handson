@@ -253,26 +253,23 @@ autoDetect()
 
 function autoDetect () {
   if (!localStorage) {
-    console.log('保存できない場合はリダイレクトしない')
-    return
+    return // 保存できない場合はリダイレクトしない
   }
 
   if (localStorage.getItem('firstRedirect')) {
-    console.log('以前リダイレクトしたから今回はリダイレクトしない')
-    return
+    return // 以前リダイレクトしたから今回はリダイレクトしない
   }
 
-  console.log('今回のリダイレクトを保存する')
+  // 今回のリダイレクトを保存する
   localStorage.setItem('firstRedirect', true)
 
+  // ブラウザーの言語
   var lang = getBrowserLanguage()
 
-  console.log('ブラウザーの言語: ', lang)
-
+  // 言語を
   lang = lang.toLowerCase()
   lang = (lang === 'ja' || lang == 'ja_jp') ? 'ja' : 'en'
 
-  console.log(lang + 'にリダイレクトします。')
   document.location.assign(lang + '/index.html')
 }
 
