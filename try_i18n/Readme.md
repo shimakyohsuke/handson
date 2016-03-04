@@ -233,6 +233,66 @@ processFiles(path.join(ROOT, 'global'), TARGET, {})
 そのリンクは `template/head.html` につけましょう。
 
 ## 自動リダイレクト
+基本的に [http の Accept-Language](https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation#The_Accept-Language_header) のヘッダーはリダイレクトのために使えますがユーザーはそれをあんまり喜んでいません。MDN にも書いてあります。
+
+> Site-designers must not be over-zealous by using language detection via this header as it can lead to a poor user experience:
+> - They should always provide a way to overcome the server-chosen language, e.g., by providing small links near the top of the page. Most user-agents provide a default value for the Accept-Language: header, adapted to the user interface language and end users often do not modify it, either by not knowing how, or by not being able to do it, as in an Internet café for instance.
+> - Once a user has overridden the server-chosen language, a site should no longer use language detection and should stick with the explicitly-chosen language.. In other words, only entry pages of a site should select the proper language using this header.
+
+日本語に翻訳:
+
+> ユーザーエキスペリエンスがが悪くならないようにサイトデザイナは自動言語検出を使いすぎない方がいいです：
+> - どの時でもサーバが選んだ言語を返す方法を用意した方がいいです。例えば：ページの上の方に言語リンクの一覧をつける。普段はユーザーが Accept-Language ヘッダーのディフォルト設定を使っています。理由はその設定があるのを知らないか設定の返事許可がないかからです。
+> - 一応ユーザーがサーバの選んだを変えたら自動システムをやめた方がいいです。別の説明にするとリダイレクトはエントリーページだけに使った方がいいです。
+
+その通りに以下のスクリプトが用意してあります。
+
+
+```JavaScript
+autoDetect()
+
+function autoDetect () {
+  if (!localStorage) {
+    console.log('保存できない場合はリダイレクトしない')
+    return
+  }
+
+  if (localStorage.getItem('firstRedirect')) {
+    console.log('以前リダイレクトしたから今回はリダイレクトしない')
+    return
+  }
+
+  console.log('今回のリダイレクトを保存する')
+  localStorage.setItem('firstRedirect', true)
+
+  var lang = getBrowserLanguage()
+
+  console.log('ブラウザーの言語: ', lang)
+
+  lang = lang.toLowerCase()
+  lang = (lang === 'ja' || lang == 'ja_jp') ? 'ja' : 'en'
+
+  console.log(lang + 'にリダイレクトします。')
+  document.location.assign(lang + '/index.html')
+}
+
+// クロスブラウザーの言語調べるスクリプト
+function getBrowserLanguage () {
+  var nav = navigator
+  return (nav.languages && nav.languages[0])
+    || nav.userLanguage
+    || nav.language
+    || 'en-US' 
+}
+```
+
+そのスクリプトを `global/index.html` に追加してください。
+
+```html
+<script type="text/javascript">
+  ...
+</script>
+```
 
 ## JSONの代わりにCSV
 
