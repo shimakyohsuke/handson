@@ -70,7 +70,7 @@ processFiles(SOURCE, path.join(TARGET, 'en'), {
 ## 文字化け
 今のテンプレートは文字コードが付いていません。普通は PHP などが [HTTP の ContentType ヘッダー](http://www.websec-room.com/2013/03/02/359)を送ってきています。ただいま開発中はフィアルをサーバにアップしないので HTML の中に [charset](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#attr-charset) のスペックが必要となります。
 
-`template/header.html` に `<meta charset="utf-8">` を第１行目につけてください。
+`template/header.html` に `<meta charset="utf-8" />` を第１行目につけてください。
 
 _メモ： meta の html タグの順番は大事です。Charset のタグは絶対に第一のタイトルタグにしてください。_
 
@@ -213,8 +213,8 @@ processFiles(path.join(ROOT, 'global'), TARGET, {})
 ```html
 <html>
   <head>
-    <meta charset="utf8">
-    <link rel="stylesheet" href="en/css/style.css">
+    <meta charset="utf8" />
+    <link rel="stylesheet" href="en/css/style.css" />
   </head>
   <body>
     <a href="en/index.html">English</a>
