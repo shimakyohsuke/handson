@@ -342,11 +342,68 @@ processFiles(SOURCE, path.join(TARGET, 'ja'), ALL_VARIABLES.ja)
 
 ## CSV を Google で管理する
 CSV ファイルを GIT またはメールで管理するのワークフローは翻訳者には不便なことがあります。
-[Google Spreadsheets](https://docs.google.com/spreadsheets/)を使うと幾つかのいいことがあります。今の CSV データ
+[Google Spreadsheets](https://docs.google.com/spreadsheets/)を使うと幾つかのいいことがあります。`lang.csv` のデータを新しいシートにインポートして下さい。
+
+[![https://gyazo.com/62f95eadf9a5b79022b4bf29f91400cd](https://i.gyazo.com/62f95eadf9a5b79022b4bf29f91400cd.gif)](https://gyazo.com/62f95eadf9a5b79022b4bf29f91400cd)
+[![https://gyazo.com/a6a1dfc733c19bf54444791521335b4d](https://i.gyazo.com/a6a1dfc733c19bf54444791521335b4d.gif)](https://gyazo.com/a6a1dfc733c19bf54444791521335b4d)
+
+スプレッドシートを作った時に翻訳者とシェアする。
+
+[![https://gyazo.com/25306952e76253617e679f13c357ea16](https://i.gyazo.com/25306952e76253617e679f13c357ea16.gif)](https://gyazo.com/25306952e76253617e679f13c357ea16)
+
+そうしてノティフィケーション設定をつけましょう。
+
+[![https://gyazo.com/b6d1ac27c49920e3497ca7dc7a2c2653](https://i.gyazo.com/b6d1ac27c49920e3497ca7dc7a2c2653.gif)](https://gyazo.com/b6d1ac27c49920e3497ca7dc7a2c2653)
+
+そうすると翻訳者または別のチームメンバーはなんかのチェンジですぐメールでノティフィケーションが入ります。変わった時にすぐに CSV エキスパートしたらすぐサイトをアップデートできます。
+
+[![https://gyazo.com/12029c546e04d7525452a828ace036e8](https://i.gyazo.com/12029c546e04d7525452a828ace036e8.gif)](https://gyazo.com/12029c546e04d7525452a828ace036e8)
 
 ## Facebook 用の OGP タグ
+Google だけではなくて Facebook も国際化のルールがあります。まずは FB は全ての ISO 639 の
+言語を[対応していません](https://developers.facebook.com/docs/internationalization#locales)。[言語の XML](http://www.facebook.com/translations/FacebookLocales.xml)をチェックすると `en` の代わりに `en_US` とかを使わないといけません。 `ja` は `ja_JP` になります。
+
+すれがわかっているから `og:language` のタグをつけましょう。`lang.csv`　に `fbLang` をつけるのを忘れないでください。
+
+```html
+<meta property="og:locale" content="{{fbLang}}" />
+```
+
+_残念ながら Facebook の言語サッポートはサーバソフトなしでは対応できません。実は別の[言語を対応したいばい](https://developers.facebook.com/docs/internationalization#locales) は `?fb_locale=ja_JP` または `?fb_locale=en_US` のリクエストでそれぞれのバーションを出さないといけません。今のときはURLパッターンを `http://site.com/product.html?fb_locale=en_US` にするのが役に立つと思います。_
+
+## Facebook の Like ボタン
+[`og`](http://ogp.me/)タグがサイトについてからはサイトもシェアしたいですよね。そのまま [Facebook のシェアスクリプト](https://developers.facebook.com/docs/plugins/like-button)を使って Like ボタンをつけたら `en_GB` のUIがでってきます。
+
+```html
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5&appId=<app_id>";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+```
+
+ちゃんと言語が出るように頑張りたかったらスクリプト `en_GB` の部分の代わりに以前に用意した `{{fbLang}}` を使って `template/footer.html` に追加してください。
 
 ## 最後の言葉
+**お疲れ様です！** この小さなサイトで一応翻訳ワークフローができましたと思います。それ以上は色々の細工がありますがこのワークフローを使うと一応自分のウエブサイトを翻訳できると思います。
 
+### 翻訳サービスについて
+「はい！サイトを翻訳したい！」と思うようになったらたぶん次の質問は「翻訳者どこで見つける？」となります。基本的に最近みつのオプションがあります。自分で翻訳するより専門者を使った方がと思います。
 
+- **オンライン翻訳サービス**:一般的に最近から翻訳用の[クラウドソーシングサービス](https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%A9%E3%82%A6%E3%83%89%E3%82%BD%E3%83%BC%E3%82%B7%E3%83%B3%E3%82%B0)があります。[gengo](https://gengo.com/ja/)はその中一番人気なサービスです。
+- **サイト翻訳サービス**: 
+ウエブサイトだけを翻訳するためのサービスも幾つかがあります。[localizejs](https://localizejs.com/ja/)は最近きになっています。
+- **翻訳オフィス**:
+テキスト翻訳のために以前のサービスが足りるかもしれません。ただ翻訳のはコンテンツだけではなく意味の翻訳のが大事だと思います。安心できるように本人を少なくともチェックするためにいると役に立っています。特に専門テキスト(契約など）は普通サービスが対応しなくてオフィスが必要になります。それぞれの言語のネーティブスピーカーがいいと思います。私は [Inscribe Language Consulting](http://www.inscribe-consulting.jp/) を使います。
 
+### ツールリスト
+今回使ったツールは全て軽くてあんまりフィーチャーがありません。もっといいサイトをもっとや吐く国際化に頑張ると思ったら以下のリンクリストを見に行ってくだっさい。
+
+- 時間: [Moment.js](http://momentjs.com/docs/#/i18n/)
+- JS一般的: [i18n.next](http://i18next.com/), [Localeplanet](http://www.localeplanet.com/api/index.html) 
+- Grunt: [grunt-static-i18n](https://www.npmjs.com/package/grunt-static-i18n), [grunt-i18n](https://www.npmjs.com/package/grunt-i18n), [grunt-i18n-gspreadsheet](https://www.npmjs.com/package/grunt-i18n-gspreadsheet), [...](https://www.npmjs.com/search?q=grunt+i18n)
+- Gulp: [gulp-i18n](https://www.npmjs.com/package/gulp-i18n), [gulp-i18n-gspreadsheet](https://www.npmjs.com/package/gulp-i18n-gspreadsheet), [gulp-i18n-localize](https://www.npmjs.com/package/gulp-i18n-localize), [...](https://www.npmjs.com/search?q=gulp+i18n)
+- 翻訳 API: [gengo](https://gengo.com/ja/developers/), [localizejs](https://help.localizejs.com/docs/installation)
